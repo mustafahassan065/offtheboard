@@ -1,140 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Off The Board — Elite Sports Betting Handicappers | Daily Picks | 4.9★ Whop</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
-  <style>
-    :root{
-      --ink:#080A06;--ink2:#0E110C;--panel:#121510;--panel2:#181C15;
-      --gold:#D4A017;--gold2:#F0BA20;--gold3:#FCCF3A;
-      --green:#22C55E;--green2:#16A34A;
-      --red:#EF4444;
-      --border:rgba(212,160,23,0.2);--bord2:rgba(255,255,255,0.06);
-      --dim:rgba(255,255,255,0.4);
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--ink);color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden;}
-    .bc{font-family:'Barlow Condensed',sans-serif;}
-    .mono{font-family:'Roboto Mono',monospace;}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Off The Board — Elite Sports Betting Handicappers | Daily Picks | 4.9★ Whop</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
 
-    /* ── GRADIENT TEXT ── */
-    .gold-text{background:linear-gradient(135deg,#B8860B,#D4A017,#F0BA20,#FCCF3A,#F0BA20);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-    .green-text{background:linear-gradient(135deg,#16A34A,#22C55E,#4ADE80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+<style>
+/* ══════════════════════════════════════
+   OFF THE BOARD — VEGAS CINEMATIC DARK
+   Completely different from all previous sites:
+   Deep void + electric gold + neon green
+   3D tilt cards | magnetic cursor | animated counters
+   ══════════════════════════════════════ */
+:root{
+  --ink:#06080A;--deep:#0A0D10;--surface:#0F1318;
+  --panel:rgba(16,20,26,0.8);
+  --gold:#D4A017;--gold2:#F0BA20;--gold3:#FDE047;
+  --green:#22C55E;--green2:#4ADE80;
+  --red:#F43F5E;
+  --electric:#FCD34D;
+  --bord:rgba(212,160,23,0.18);
+  --bord2:rgba(255,255,255,0.05);
+}
 
-    /* ── GLOWS ── */
-    .gold-glow{box-shadow:0 0 40px rgba(212,160,23,0.3),0 0 80px rgba(212,160,23,0.1);}
-    .btn-gold{background:linear-gradient(135deg,#B8860B,var(--gold),var(--gold2));transition:all .35s;color:#000;}
-    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(212,160,23,0.5);}
-    .btn-outline{border:1px solid rgba(212,160,23,0.4);transition:all .35s;}
-    .btn-outline:hover{border-color:var(--gold);background:rgba(212,160,23,0.08);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink);
+  color:rgba(255,255,255,0.75);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  cursor:none;
+}
+.bc{font-family:'Barlow Condensed',sans-serif;}
+.mono{font-family:'Roboto Mono',monospace;}
 
-    /* ── TEXTURE ── */
-    body::after{
-      content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(255,255,255,0.015)'/%3E%3C/svg%3E");
-    }
+/* ── CUSTOM CURSOR ── */
+#cursor{
+  position:fixed;width:12px;height:12px;
+  background:var(--gold2);border-radius:50%;
+  pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);
+  transition:transform .1s ease,opacity .2s ease;
+  mix-blend-mode:difference;
+}
+#cursor-ring{
+  position:fixed;width:40px;height:40px;
+  border:1px solid rgba(212,160,23,0.5);
+  border-radius:50%;pointer-events:none;
+  z-index:99998;transform:translate(-50%,-50%);
+  transition:transform .15s ease,width .3s ease,height .3s ease,border-color .3s ease;
+}
+body:hover #cursor{opacity:1;}
 
-    /* ── DIAGONAL STRIPE ── */
-    .stripe-bg{
-      background-image:repeating-linear-gradient(
-        -45deg,transparent,transparent 10px,rgba(212,160,23,0.015) 10px,rgba(212,160,23,0.015) 11px
-      );
-    }
+/* ── GRADIENT TEXT ── */
+.gold-text{
+  background:linear-gradient(135deg,#B8860B,#D4A017,#F0BA20,#FDE047,#F0BA20);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.green-text{
+  background:linear-gradient(135deg,#16A34A,#22C55E,#4ADE80,#86EFAC);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.white-gold{
+  background:linear-gradient(135deg,#ffffff,#f5d77a,#D4A017);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
 
-    /* ── SCOREBOARD BORDER ── */
-    .scoreboard{
-      border:1px solid rgba(212,160,23,0.3);
-      background:var(--panel);
-      box-shadow:inset 0 0 40px rgba(212,160,23,0.03),0 0 0 1px rgba(212,160,23,0.08);
-    }
+/* ── ABSTRACT VEGAS MESH BACKGROUND ── */
+.vegas-bg{
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 5%,  rgba(212,160,23,0.06) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 60% at 85% 90%,  rgba(34,197,94,0.04)  0%,transparent 70%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(180,100,0,0.05)  0%,transparent 70%),
+    var(--ink);
+}
 
-    /* ── NAV ── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:all .35s;}
-    nav.on{background:rgba(8,10,6,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+/* ── CASINO GRID ── */
+.casino-grid{
+  background-image:
+    linear-gradient(rgba(212,160,23,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,160,23,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
 
-    /* ── TICKER ── */
-    @keyframes otb-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    .otb-tick{animation:otb-scroll 28s linear infinite;}
+/* ── SCAN LINES ── */
+.scanlines{
+  background-image:repeating-linear-gradient(
+    0deg,transparent,transparent 3px,rgba(0,0,0,0.12) 3px,rgba(0,0,0,0.12) 4px
+  );
+}
 
-    /* ── CARDS ── */
-    .sport-card{background:var(--panel);border:1px solid var(--bord2);transition:all .4s;position:relative;overflow:hidden;}
-    .sport-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .4s;}
-    .sport-card:hover{border-color:var(--border);transform:translateY(-5px);}
-    .sport-card:hover::before{transform:scaleX(1);}
+/* ── GLASS LUXURY PANELS ── */
+.glass{
+  background:linear-gradient(145deg,rgba(22,28,38,0.75),rgba(12,16,22,0.9));
+  backdrop-filter:blur(32px) saturate(1.5);
+  -webkit-backdrop-filter:blur(32px) saturate(1.5);
+  border:1px solid var(--bord);
+  box-shadow:0 8px 48px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.glass-green{
+  background:linear-gradient(145deg,rgba(10,30,18,0.8),rgba(5,20,12,0.9));
+  border:1px solid rgba(34,197,94,0.25);
+  box-shadow:0 0 60px rgba(34,197,94,0.06),inset 0 1px 0 rgba(34,197,94,0.04);
+}
 
-    /* ── ODDS PILL ── */
-    .odds-w{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);color:var(--green);}
-    .odds-l{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);color:var(--red);}
-    .odds-p{background:rgba(212,160,23,0.12);border:1px solid rgba(212,160,23,0.3);color:var(--gold2);}
+/* ── 3D TILT CARD ── */
+.tilt-card{
+  transition:transform 0.15s ease,box-shadow 0.15s ease;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.tilt-card:hover{
+  box-shadow:0 30px 80px rgba(0,0,0,0.8),0 0 60px rgba(212,160,23,0.08);
+}
 
-    /* ── REVEAL ── */
-    @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    .reveal{opacity:0;}
-    .reveal.in{animation:rise .6s ease forwards;}
+/* ── SHINE SWEEP ── */
+.shine{position:relative;overflow:hidden;}
+.shine::after{
+  content:'';position:absolute;top:0;left:-120%;
+  width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent);
+  transform:skewX(-25deg);
+  transition:left 1s ease;pointer-events:none;z-index:1;
+}
+.shine:hover::after{left:160%;}
 
-    /* ── MOBILE ── */
-    #mnav{transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);}
-    #mnav.open{transform:translateX(0);}
+/* ── BUTTONS ── */
+.btn-vegas{
+  background:linear-gradient(135deg,#92600A,#D4A017,#F0BA20);
+  color:#000;font-weight:900;
+  box-shadow:0 4px 24px rgba(212,160,23,0.35),inset 0 1px 0 rgba(255,255,255,0.25);
+  transition:all .35s cubic-bezier(0.16,1,0.3,1);
+  position:relative;overflow:hidden;
+}
+.btn-vegas::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent,rgba(255,255,255,0.1));
+  pointer-events:none;
+}
+.btn-vegas:hover{
+  transform:translateY(-3px) scale(1.01);
+  box-shadow:0 16px 48px rgba(212,160,23,0.5),0 0 80px rgba(212,160,23,0.2),inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.btn-ghost{
+  border:1px solid rgba(212,160,23,0.3);
+  color:rgba(255,255,255,0.85);
+  background:rgba(212,160,23,0.04);
+  transition:all .35s cubic-bezier(0.16,1,0.3,1);
+}
+.btn-ghost:hover{
+  border-color:rgba(212,160,23,0.6);
+  background:rgba(212,160,23,0.09);
+  transform:translateY(-2px);
+  box-shadow:0 0 40px rgba(212,160,23,0.1);
+}
 
-    /* ── FAQ ── */
-    .fb{max-height:0;overflow:hidden;transition:max-height .45s ease;}
-    .fb.open{max-height:500px;}
-    .fi{transition:transform .35s;}
-    .fi.open{transform:rotate(45deg);}
+/* ── ANIMATED TICKER ── */
+@keyframes otb-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.otb-tick{animation:otb-scroll 30s linear infinite;}
 
-    /* ── PULSE ── */
-    .pulse-gold{width:8px;height:8px;border-radius:50%;background:var(--gold2);animation:pg 2s infinite;}
-    @keyframes pg{0%{box-shadow:0 0 0 0 rgba(212,160,23,.5)}70%{box-shadow:0 0 0 10px rgba(212,160,23,0)}100%{box-shadow:0 0 0 0 rgba(212,160,23,0)}}
+/* ── FLIP COUNTER ── */
+.flip-num{
+  font-variant-numeric:tabular-nums;
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
 
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar{width:4px;}
-    ::-webkit-scrollbar-track{background:var(--ink);}
-    ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px;}
+/* ── NEON PULSE ── */
+.neon-gold{
+  animation:neonPulse 3s ease-in-out infinite;
+}
+@keyframes neonPulse{
+  0%,100%{box-shadow:0 0 5px rgba(212,160,23,0.4),0 0 20px rgba(212,160,23,0.2);}
+  50%{box-shadow:0 0 10px rgba(212,160,23,0.7),0 0 40px rgba(212,160,23,0.35),0 0 80px rgba(212,160,23,0.15);}
+}
+.neon-green{
+  animation:neonGreen 3s ease-in-out infinite;
+}
+@keyframes neonGreen{
+  0%,100%{box-shadow:0 0 5px rgba(34,197,94,0.4),0 0 20px rgba(34,197,94,0.2);}
+  50%{box-shadow:0 0 10px rgba(34,197,94,0.7),0 0 40px rgba(34,197,94,0.35);}
+}
 
-    /* ── LIVE SCORE ROW ── */
-    .score-row{border-bottom:1px solid rgba(255,255,255,0.04);transition:background .2s;}
-    .score-row:hover{background:rgba(212,160,23,.03);}
+/* ── PULSE DOT ── */
+.pdot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold2);
+  animation:pdotk 2s infinite;
+}
+@keyframes pdotk{0%{box-shadow:0 0 0 0 rgba(212,160,23,.6);}70%{box-shadow:0 0 0 10px rgba(212,160,23,0);}100%{box-shadow:0 0 0 0 rgba(212,160,23,0);}}
+.gdot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green2);animation:gdotk 2s infinite;
+}
+@keyframes gdotk{0%{box-shadow:0 0 0 0 rgba(34,197,94,.6);}70%{box-shadow:0 0 0 10px rgba(34,197,94,0);}100%{box-shadow:0 0 0 0 rgba(34,197,94,0);}}
 
-    /* ── SECTION DIVIDER ── */
-    .section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-  </style>
+/* ── SLIDE REVEAL ── */
+@keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+.reveal{opacity:0;}
+.reveal.in{animation:slideUp .7s cubic-bezier(0.16,1,0.3,1) forwards;}
+.reveal-r.in{animation:slideRight .7s cubic-bezier(0.16,1,0.3,1) forwards;}
+.reveal-l.in{animation:slideLeft .7s cubic-bezier(0.16,1,0.3,1) forwards;}
+
+/* ── LINE DIVIDERS ── */
+.gold-line{height:1px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);}
+.dim-line{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;transition:all .4s;}
+nav.on{
+  background:rgba(6,8,10,.96);backdrop-filter:blur(32px);
+  border-bottom:1px solid rgba(212,160,23,0.1);
+  box-shadow:0 4px 32px rgba(0,0,0,0.5);
+}
+
+/* ── MOBILE NAV ── */
+#mnav{transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);}
+#mnav.open{transform:translateX(0);}
+
+/* ── FAQ ACCORDION ── */
+.fb{max-height:0;overflow:hidden;transition:max-height .5s ease;}
+.fb.open{max-height:600px;}
+.fi{transition:transform .35s;}
+.fi.open{transform:rotate(45deg);}
+
+/* ── SCORE BOARD ROWS ── */
+.sb-row{border-bottom:1px solid rgba(255,255,255,0.04);transition:background .2s;}
+.sb-row:hover{background:rgba(212,160,23,0.025);}
+
+/* ── SPORT CARD HOVER ── */
+.sport-c{
+  position:relative;overflow:hidden;
+  transition:all .45s cubic-bezier(0.16,1,0.3,1);
+}
+.sport-c::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(212,160,23,0.05),transparent);
+  opacity:0;transition:opacity .45s;
+}
+.sport-c::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold2),transparent);
+  transform:scaleX(0);transition:transform .5s cubic-bezier(0.16,1,0.3,1);
+}
+.sport-c:hover{transform:translateY(-7px);border-color:rgba(212,160,23,0.28) !important;}
+.sport-c:hover::before{opacity:1;}
+.sport-c:hover::after{transform:scaleX(1);}
+
+/* ── ODDS PILLS ── */
+.pill-w{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.28);color:var(--green);}
+.pill-l{background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.28);color:var(--red);}
+.pill-p{background:rgba(212,160,23,0.1);border:1px solid rgba(212,160,23,0.28);color:var(--gold2);}
+
+/* ── TIKTOK WRAPPER ── */
+.tt-wrap{
+  position:relative;border-radius:18px;overflow:hidden;
+  background:linear-gradient(145deg,#0d1218,#070a0e);
+  box-shadow:0 0 0 1px rgba(212,160,23,0.16),0 24px 60px rgba(0,0,0,0.8),inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.tt-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(212,160,23,0.04) 0%,transparent 25%,transparent 75%,rgba(0,0,0,0.4) 100%);
+  z-index:2;pointer-events:none;border-radius:18px;
+}
+.tt-wrap iframe{display:block;border:none !important;}
+
+/* ── BANKROLL PROGRESS BARS ── */
+.pbar-fill{
+  height:4px;border-radius:4px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  transition:width 1.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--ink);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+
+/* ── WIN COUNTER CARDS ── */
+.wstat{
+  background:linear-gradient(145deg,rgba(18,24,32,0.9),rgba(10,14,20,0.95));
+  border:1px solid rgba(212,160,23,0.1);
+  transition:all .4s ease;
+}
+.wstat:hover{
+  border-color:rgba(212,160,23,0.3);
+  box-shadow:0 0 40px rgba(212,160,23,0.06);
+}
+</style>
 </head>
-<body>
+<body class="relative">
 
-<!-- ═══════════════════════════
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- LAYERED BACKGROUNDS -->
+<div class="vegas-bg fixed inset-0 z-[-3]"></div>
+<div class="casino-grid fixed inset-0 z-[-2]"
+     style="mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 25%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 25%,transparent 80%);"></div>
+<div class="scanlines fixed inset-0 z-[-1]"></div>
+
+<!-- ════════════════════════════════
      NAV
-═══════════════════════════ -->
+════════════════════════════════ -->
 <nav id="navbar">
   <div class="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
-    <!-- LOGO PLACEHOLDER — replace with real OTB logo -->
+
     <a href="#" class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,var(--gold),#8B6914);">
-        <img src="offtheboard.avif">
+      <div class="relative">
+        <div class="w-11 h-11 rounded-2xl flex items-center justify-center neon-gold overflow-hidden"
+             style="background:linear-gradient(135deg,#92600A,#D4A017);">
+          <img src="offtheboard.avif" alt="Off The Board Logo" class="w-full h-full object-cover"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <span class="hidden w-full h-full items-center justify-center bc font-black text-black text-xs tracking-tight">OTB</span>
+        </div>
       </div>
       <div>
-        <div class="bc font-black text-white text-xl leading-none tracking-wide uppercase" style="font-size:1.25rem;letter-spacing:.05em;">Off The Board</div>
-        <div class="mono text-xs leading-none opacity-50" style="font-size:.55rem;letter-spacing:.15em;">ELITE HANDICAPPERS · EST. 2025</div>
+        <div class="bc font-black text-white text-xl leading-none tracking-wide uppercase">Off The Board</div>
+        <div class="mono leading-none opacity-45" style="font-size:.52rem;letter-spacing:.18em;color:var(--gold2);">ELITE HANDICAPPERS · EST. 2025</div>
       </div>
     </a>
 
     <div class="hidden lg:flex items-center gap-8">
-      <a href="#about"    class="text-gray-400 hover:text-white text-sm transition-colors">About OTB</a>
-      <a href="#sports"   class="text-gray-400 hover:text-white text-sm transition-colors">Sports Covered</a>
-      <a href="#features" class="text-gray-400 hover:text-white text-sm transition-colors">Features</a>
-      <a href="#pricing"  class="text-gray-400 hover:text-white text-sm transition-colors">Pricing</a>
-      <a href="#faq"      class="text-gray-400 hover:text-white text-sm transition-colors">FAQ</a>
+      <a href="#about"    class="mono text-xs text-gray-500 hover:text-white transition-all uppercase tracking-widest hover:text-[var(--gold2)]">About OTB</a>
+      <a href="#sports"   class="mono text-xs text-gray-500 hover:text-white transition-all uppercase tracking-widest hover:text-[var(--gold2)]">Sports</a>
+      <a href="#features" class="mono text-xs text-gray-500 hover:text-white transition-all uppercase tracking-widest hover:text-[var(--gold2)]">Features</a>
+      <a href="#pricing"  class="mono text-xs text-gray-500 hover:text-white transition-all uppercase tracking-widest hover:text-[var(--gold2)]">Pricing</a>
     </div>
 
     <div class="flex items-center gap-4">
       <a href="https://whop.com/off-the-board/off-the-board?a=digitalartlab" target="_blank"
-         class="hidden lg:inline-flex btn-gold items-center gap-2 px-5 py-2.5 rounded-xl bc font-black text-sm uppercase tracking-wider"
-         style="letter-spacing:.08em;">
+         class="hidden lg:inline-flex btn-vegas items-center gap-2 px-5 py-2.5 rounded-xl bc font-black text-sm uppercase tracking-wider">
         Join — $20 / 3 Days
       </a>
       <button id="ham" class="lg:hidden p-2 flex flex-col gap-1.5">
@@ -147,218 +351,237 @@
 </nav>
 
 <!-- MOBILE NAV -->
-<div id="mnav" class="fixed inset-0 z-40 flex flex-col items-center justify-center" style="background:rgba(8,10,6,.99);">
+<div id="mnav" class="fixed inset-0 z-40 flex flex-col items-center justify-center"
+     style="background:rgba(6,8,10,.99);backdrop-filter:blur(40px);">
   <div class="text-center space-y-8">
-    <a href="#about"    class="ml block bc font-black text-6xl text-white uppercase tracking-widest">About</a>
-    <a href="#sports"   class="ml block bc font-black text-6xl text-white uppercase tracking-widest">Sports</a>
-    <a href="#features" class="ml block bc font-black text-6xl text-white uppercase tracking-widest">Features</a>
-    <a href="#pricing"  class="ml block bc font-black text-6xl text-white uppercase tracking-widest">Pricing</a>
+    <a href="#about"    class="ml block bc font-black text-6xl text-white uppercase tracking-tight hover:text-[var(--gold2)] transition-colors">About</a>
+    <a href="#sports"   class="ml block bc font-black text-6xl text-white uppercase tracking-tight hover:text-[var(--gold2)] transition-colors">Sports</a>
+    <a href="#features" class="ml block bc font-black text-6xl text-white uppercase tracking-tight hover:text-[var(--gold2)] transition-colors">Features</a>
+    <a href="#pricing"  class="ml block bc font-black text-6xl text-white uppercase tracking-tight hover:text-[var(--gold2)] transition-colors">Pricing</a>
     <a href="https://whop.com/off-the-board/off-the-board?a=digitalartlab" target="_blank"
-       class="inline-block mt-8 btn-gold px-10 py-4 rounded-xl bc font-black text-2xl uppercase tracking-wider">
+       class="inline-block mt-8 btn-vegas px-10 py-4 rounded-2xl bc font-black text-2xl uppercase tracking-wider">
       Join — $20 / 3 Days
     </a>
   </div>
 </div>
 
-<!-- ═══════════════════════════
-     HERO
-═══════════════════════════ -->
-<section class="stripe-bg relative min-h-screen flex flex-col justify-center pt-16 overflow-hidden" style="background:var(--ink);">
-  <!-- Stadium background -->
-  <div class="absolute inset-0">
-    <img src="https://images.unsplash.com/photo-1540747913346-19212a4d56b0?w=1800&q=80&auto=format&fit=crop"
-         alt="Stadium night lights" class="w-full h-full object-cover opacity-15"/>
-    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(8,10,6,.95) 0%,rgba(8,10,6,.7) 50%,rgba(8,10,6,.98) 100%);"></div>
+<!-- ════════════════════════════════
+     HERO — SPLIT SCREEN + LIVE SCOREBOARD
+════════════════════════════════ -->
+<section class="min-h-screen flex flex-col justify-center pt-16 relative overflow-hidden">
+  <!-- Abstract glow orbs -->
+  <div class="absolute" style="width:900px;height:900px;top:-300px;right:-400px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,0.07),transparent 60%);filter:blur(80px);pointer-events:none;"></div>
+  <div class="absolute" style="width:500px;height:500px;bottom:-200px;left:-200px;border-radius:50%;background:radial-gradient(circle,rgba(34,197,94,0.05),transparent 60%);filter:blur(80px);pointer-events:none;"></div>
+
+  <!-- Decorative vertical accent lines -->
+  <div class="absolute inset-y-0 left-[20%] w-px hidden lg:block" style="background:linear-gradient(180deg,transparent,rgba(212,160,23,0.06),transparent);"></div>
+  <div class="absolute inset-y-0 right-[20%] w-px hidden lg:block" style="background:linear-gradient(180deg,transparent,rgba(212,160,23,0.04),transparent);"></div>
+
+  <!-- Top gold accent line -->
+  <div class="absolute top-0 left-0 right-0" style="height:1.5px;background:linear-gradient(90deg,transparent,rgba(212,160,23,0.5),rgba(240,186,32,0.8),rgba(212,160,23,0.5),transparent);"></div>
+
+  <!-- Decorative abstract SVG: stadium arch silhouette -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <svg class="absolute bottom-0 left-0 right-0 w-full" viewBox="0 0 1440 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.04;">
+      <path d="M0 300 Q 240 80 480 60 Q 720 40 960 60 Q 1200 80 1440 300 Z" fill="rgba(212,160,23,1)"/>
+      <path d="M0 300 Q 240 100 480 80 Q 720 60 960 80 Q 1200 100 1440 300" stroke="rgba(212,160,23,0.6)" stroke-width="2" fill="none"/>
+    </svg>
   </div>
 
-  <!-- Gold glow orb -->
-  <div class="absolute" style="width:700px;height:700px;top:-200px;right:-200px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.12),transparent 65%);filter:blur(40px);pointer-events:none;"></div>
-  <div class="absolute" style="width:400px;height:400px;bottom:-100px;left:-100px;border-radius:50%;background:radial-gradient(circle,rgba(34,197,94,.06),transparent 65%);filter:blur(40px);pointer-events:none;"></div>
-
-  <!-- Top gold line -->
-  <div class="absolute top-0 left-0 right-0 h-0.5" style="background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);"></div>
-
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-20 relative z-10">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-16 relative z-10 w-full">
     <div class="grid lg:grid-cols-2 gap-16 items-center">
 
       <!-- LEFT COPY -->
       <div>
-        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full mb-8" style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.3);">
-          <div class="pulse-gold"></div>
+        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full mb-8"
+             style="background:rgba(212,160,23,.07);border:1px solid rgba(212,160,23,.25);backdrop-filter:blur(16px);">
+          <div class="pdot"></div>
           <span class="mono text-xs font-bold uppercase tracking-widest" style="color:var(--gold2);">4.9★ · 130 Reviews · 696 Members · Whop Verified</span>
         </div>
 
-        <h1 class="bc font-black leading-none mb-4" style="font-size:clamp(4rem,10vw,10rem);line-height:.85;letter-spacing:-.01em;">
-          <span class="text-white">OFF</span><br/>
-          <span class="gold-text">THE</span><br/>
-          <span class="text-white">BOARD.</span>
-        </h1>
+        <!-- Split-screen giant headline with clip-path reveal -->
+        <div class="overflow-hidden mb-1">
+          <h1 class="bc font-black text-white leading-none" style="font-size:clamp(4.5rem,11vw,11rem);line-height:.82;letter-spacing:-.02em;" id="h1Line1">OFF</h1>
+        </div>
+        <div class="overflow-hidden mb-1">
+          <h1 class="bc font-black gold-text leading-none" style="font-size:clamp(4.5rem,11vw,11rem);line-height:.82;letter-spacing:-.02em;" id="h1Line2">THE</h1>
+        </div>
+        <div class="overflow-hidden mb-6">
+          <h1 class="bc font-black text-white leading-none" style="font-size:clamp(4.5rem,11vw,11rem);line-height:.82;letter-spacing:-.02em;" id="h1Line3">BOARD.</h1>
+        </div>
 
-        <p class="bc font-bold text-2xl uppercase tracking-wider mb-5" style="color:rgba(255,255,255,0.5);letter-spacing:.12em;">
+        <p class="bc font-bold text-2xl uppercase mb-5" style="color:rgba(255,255,255,0.4);letter-spacing:.1em;">
           Teaching You How To Capitalize In Sports Betting
         </p>
 
-        <p class="text-gray-400 max-w-md mb-6 leading-relaxed" style="font-size:1.05rem;">
-          A <strong class="text-white">highly skilled group of elite handicappers</strong> delivering their very best plays on a daily basis. High-level insights and advice across every major sport. When we're on a game — the books know it.
+        <p class="leading-relaxed mb-6 max-w-md" style="font-size:1.05rem;color:rgba(255,255,255,0.55);">
+          A <strong class="text-white font-semibold">highly skilled group of elite handicappers</strong> delivering their very best plays on a daily basis. High-level insights and advice across every major sport. When we're on a game — the books know it.
         </p>
 
-        <div class="p-4 rounded-xl mb-8" style="background:rgba(212,160,23,.07);border-left:3px solid var(--gold);border:1px solid var(--border);">
-          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.75);">
+        <!-- OTB name explanation block -->
+        <div class="mb-8 reveal" style="padding:16px 20px;border-radius:14px;background:linear-gradient(135deg,rgba(212,160,23,0.06),rgba(212,160,23,0.02));border:1px solid rgba(212,160,23,0.18);border-left:3px solid var(--gold);">
+          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.68);">
             <strong class="text-white">"Off the Board"</strong> — the term sportsbooks use when they <em>remove a game from the betting board</em> because of injury news or breaking information that shifts the line dramatically. We named ourselves after it because <strong class="text-white">we operate with the same intelligence level as the books.</strong>
           </p>
         </div>
 
-        <div class="flex items-center gap-4 mb-8">
-          <div class="flex gap-0.5" style="color:var(--gold2);">★★★★★</div>
-          <span class="mono text-xs text-gray-500">4.9 · 130 Reviews · Whop Verified · 696 Members</span>
+        <div class="flex items-center gap-4 mb-8 reveal">
+          <div style="color:var(--gold2);">★★★★★</div>
+          <span class="mono text-xs" style="color:rgba(255,255,255,0.3);">4.9 · 130 Reviews · Whop Verified · 696 Members</span>
         </div>
 
-        <div class="flex flex-wrap gap-4 mb-10">
+        <div class="flex flex-wrap gap-4 mb-10 reveal">
           <a href="https://whop.com/off-the-board/off-the-board?a=digitalartlab" target="_blank"
-             class="btn-gold inline-flex items-center gap-2 px-8 py-4 rounded-xl bc font-black text-lg uppercase tracking-wider gold-glow"
-             style="letter-spacing:.08em;">
+             class="btn-vegas inline-flex items-center gap-2 px-8 py-4 rounded-2xl bc font-black text-lg uppercase tracking-wider neon-gold">
             Join Now — $20 / 3 Days
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="https://whop.com/off-the-board?a=digitalartlab" target="_blank"
-             class="btn-outline inline-flex items-center gap-2 px-8 py-4 rounded-xl bc font-bold text-lg uppercase tracking-wider text-white"
-             style="letter-spacing:.08em;">
+             class="btn-ghost inline-flex items-center gap-2 px-8 py-4 rounded-2xl bc font-bold text-lg uppercase tracking-wider">
             View Full Whop →
           </a>
         </div>
 
-        <!-- Mini stats -->
-        <div class="grid grid-cols-4 gap-3">
-          <div class="p-3 rounded-xl text-center" style="background:var(--panel2);">
-            <div class="bc font-black text-xl" style="color:var(--gold2);">4.9★</div>
-            <div class="text-xs text-gray-500 mt-0.5">Whop Rating</div>
+        <!-- Animated stat counters -->
+        <div class="grid grid-cols-4 gap-3 reveal">
+          <div class="wstat rounded-2xl p-3 text-center">
+            <div class="bc font-black text-xl gold-text counter" data-target="4.9" data-suffix="★">0</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Whop Rating</div>
           </div>
-          <div class="p-3 rounded-xl text-center" style="background:var(--panel2);">
-            <div class="bc font-black text-xl" style="color:var(--gold2);">130+</div>
-            <div class="text-xs text-gray-500 mt-0.5">Reviews</div>
+          <div class="wstat rounded-2xl p-3 text-center">
+            <div class="bc font-black text-xl gold-text counter" data-target="130" data-suffix="+">0</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Reviews</div>
           </div>
-          <div class="p-3 rounded-xl text-center" style="background:var(--panel2);">
-            <div class="bc font-black text-xl" style="color:var(--gold2);">696</div>
-            <div class="text-xs text-gray-500 mt-0.5">Members</div>
+          <div class="wstat rounded-2xl p-3 text-center">
+            <div class="bc font-black text-xl gold-text counter" data-target="696">0</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Members</div>
           </div>
-          <div class="p-3 rounded-xl text-center" style="background:var(--panel2);">
-            <div class="bc font-black text-xl" style="color:var(--gold2);">Daily</div>
-            <div class="text-xs text-gray-500 mt-0.5">Best Plays</div>
+          <div class="wstat rounded-2xl p-3 text-center">
+            <div class="bc font-black text-xl gold-text">Daily</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Best Plays</div>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT: Live Odds Board Widget -->
+      <!-- RIGHT: Elevated Live Picks Board -->
       <div class="hidden lg:block space-y-4">
 
-        <!-- Animated odds board -->
-        <div class="scoreboard rounded-2xl overflow-hidden">
-          <div class="flex items-center justify-between px-5 py-3" style="background:rgba(212,160,23,.06);border-bottom:1px solid var(--border);">
-            <div class="flex items-center gap-2">
-              <div class="pulse-gold"></div>
-              <span class="mono text-xs font-bold uppercase tracking-widest" style="color:var(--gold2);">OTB Daily Picks Board — Live</span>
+        <!-- Picks scoreboard — glassmorphic casino terminal -->
+        <div class="glass rounded-2xl overflow-hidden tilt-card" id="scoreBoard">
+          <!-- Terminal title bar -->
+          <div class="flex items-center justify-between px-5 py-3.5"
+               style="background:rgba(212,160,23,0.05);border-bottom:1px solid rgba(212,160,23,0.12);">
+            <div class="flex items-center gap-3">
+              <div class="flex gap-1.5">
+                <div class="w-2.5 h-2.5 rounded-full" style="background:#ff5f57;"></div>
+                <div class="w-2.5 h-2.5 rounded-full" style="background:#ffbd2e;"></div>
+                <div class="w-2.5 h-2.5 rounded-full" style="background:#28c840;"></div>
+              </div>
+              <div class="pdot ml-2"></div>
+              <span class="mono text-xs font-bold uppercase tracking-widest" style="color:var(--gold2);">OTB Daily Picks — Live Board</span>
             </div>
-            <span class="mono text-xs text-gray-600">Updated: Today</span>
+            <span class="mono text-xs" style="color:rgba(255,255,255,0.25);">Updated: Today</span>
           </div>
 
-          <!-- Headers -->
-          <div class="grid grid-cols-5 px-5 py-2 mono text-xs text-gray-600 border-b" style="border-color:rgba(255,255,255,0.04);">
+          <!-- Column headers -->
+          <div class="grid grid-cols-5 px-5 py-2.5 mono text-xs border-b" style="color:rgba(255,255,255,0.22);border-color:rgba(255,255,255,0.04);">
             <span class="col-span-2">Matchup</span>
             <span>Pick</span>
             <span>Odds</span>
             <span>Result</span>
           </div>
 
-          <!-- Pick rows -->
+          <!-- Rows -->
           <div>
-            <div class="score-row grid grid-cols-5 px-5 py-3 items-center">
+            <div class="sb-row grid grid-cols-5 px-5 py-3 items-center">
               <div class="col-span-2">
                 <div class="text-xs text-white font-semibold">Lakers vs Celtics</div>
-                <div class="mono text-xs text-gray-600">NBA · 7:30PM ET</div>
+                <div class="mono text-xs" style="color:rgba(255,255,255,0.28);">NBA · 7:30PM ET</div>
               </div>
               <div class="mono text-xs" style="color:var(--gold2);">LAL -3.5</div>
               <div class="mono text-xs text-white">-110</div>
-              <div><span class="odds-w mono text-xs px-2 py-0.5 rounded-md font-bold">WIN ✓</span></div>
+              <div><span class="pill-w mono text-xs px-2 py-0.5 rounded-lg font-bold">WIN ✓</span></div>
             </div>
-            <div class="score-row grid grid-cols-5 px-5 py-3 items-center">
+            <div class="sb-row grid grid-cols-5 px-5 py-3 items-center">
               <div class="col-span-2">
                 <div class="text-xs text-white font-semibold">Chiefs vs Ravens</div>
-                <div class="mono text-xs text-gray-600">NFL · 4:25PM ET</div>
+                <div class="mono text-xs" style="color:rgba(255,255,255,0.28);">NFL · 4:25PM ET</div>
               </div>
               <div class="mono text-xs" style="color:var(--gold2);">KC ML</div>
               <div class="mono text-xs text-white">-135</div>
-              <div><span class="odds-w mono text-xs px-2 py-0.5 rounded-md font-bold">WIN ✓</span></div>
+              <div><span class="pill-w mono text-xs px-2 py-0.5 rounded-lg font-bold">WIN ✓</span></div>
             </div>
-            <div class="score-row grid grid-cols-5 px-5 py-3 items-center">
+            <div class="sb-row grid grid-cols-5 px-5 py-3 items-center">
               <div class="col-span-2">
                 <div class="text-xs text-white font-semibold">Yankees vs Red Sox</div>
-                <div class="mono text-xs text-gray-600">MLB · 1:05PM ET</div>
+                <div class="mono text-xs" style="color:rgba(255,255,255,0.28);">MLB · 1:05PM ET</div>
               </div>
               <div class="mono text-xs" style="color:var(--gold2);">O 9.5</div>
               <div class="mono text-xs text-white">-105</div>
-              <div><span class="odds-w mono text-xs px-2 py-0.5 rounded-md font-bold">WIN ✓</span></div>
+              <div><span class="pill-w mono text-xs px-2 py-0.5 rounded-lg font-bold">WIN ✓</span></div>
             </div>
-            <div class="score-row grid grid-cols-5 px-5 py-3 items-center">
+            <div class="sb-row grid grid-cols-5 px-5 py-3 items-center">
               <div class="col-span-2">
                 <div class="text-xs text-white font-semibold">Maple Leafs vs Bruins</div>
-                <div class="mono text-xs text-gray-600">NHL · 6:00PM ET</div>
+                <div class="mono text-xs" style="color:rgba(255,255,255,0.28);">NHL · 6:00PM ET</div>
               </div>
               <div class="mono text-xs" style="color:var(--gold2);">TOR ML</div>
               <div class="mono text-xs text-white">+145</div>
-              <div><span class="odds-p mono text-xs px-2 py-0.5 rounded-md font-bold">LIVE 🔴</span></div>
+              <div><span class="pill-p mono text-xs px-2 py-0.5 rounded-lg font-bold">LIVE 🔴</span></div>
             </div>
-            <div class="score-row grid grid-cols-5 px-5 py-3 items-center">
+            <div class="sb-row grid grid-cols-5 px-5 py-3 items-center">
               <div class="col-span-2">
                 <div class="text-xs text-white font-semibold">Duke vs UNC</div>
-                <div class="mono text-xs text-gray-600">NCAAB · 9:10PM ET</div>
+                <div class="mono text-xs" style="color:rgba(255,255,255,0.28);">NCAAB · 9:10PM ET</div>
               </div>
               <div class="mono text-xs" style="color:var(--gold2);">DUK -5</div>
               <div class="mono text-xs text-white">-110</div>
-              <div><span class="odds-p mono text-xs px-2 py-0.5 rounded-md font-bold">PENDING</span></div>
+              <div><span class="pill-p mono text-xs px-2 py-0.5 rounded-lg font-bold">PENDING</span></div>
             </div>
           </div>
 
-          <div class="px-5 py-3 flex items-center justify-between" style="border-top:1px solid rgba(255,255,255,.04);">
-            <span class="mono text-xs text-gray-600">Today's Record:</span>
-            <span class="mono text-xs font-bold" style="color:var(--green);">3-0 Settled · 2 Pending</span>
+          <div class="px-5 py-3.5 flex items-center justify-between"
+               style="background:rgba(212,160,23,0.03);border-top:1px solid rgba(255,255,255,0.04);">
+            <span class="mono text-xs" style="color:rgba(255,255,255,0.3);">Today's Record:</span>
+            <span class="mono text-xs font-bold neon-green px-3 py-1 rounded-lg" style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);color:var(--green);">3-0 Settled · 2 Pending</span>
           </div>
         </div>
 
-        <!-- Sports icons row -->
+        <!-- Sport icons grid -->
         <div class="grid grid-cols-4 gap-3">
-          <div class="p-4 rounded-xl text-center" style="background:var(--panel);border:1px solid var(--bord2);">
+          <div class="wstat rounded-xl p-4 text-center sport-c" style="border:1px solid var(--bord2);">
             <div class="text-3xl mb-2">🏀</div>
             <div class="bc font-bold text-xs text-white uppercase tracking-wider">NBA</div>
-            <div class="mono text-xs text-gray-600 mt-0.5">Daily Picks</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Daily Picks</div>
           </div>
-          <div class="p-4 rounded-xl text-center" style="background:var(--panel);border:1px solid var(--bord2);">
+          <div class="wstat rounded-xl p-4 text-center sport-c" style="border:1px solid var(--bord2);">
             <div class="text-3xl mb-2">🏈</div>
             <div class="bc font-bold text-xs text-white uppercase tracking-wider">NFL</div>
-            <div class="mono text-xs text-gray-600 mt-0.5">Daily Picks</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Daily Picks</div>
           </div>
-          <div class="p-4 rounded-xl text-center" style="background:var(--panel);border:1px solid var(--bord2);">
+          <div class="wstat rounded-xl p-4 text-center sport-c" style="border:1px solid var(--bord2);">
             <div class="text-3xl mb-2">⚾</div>
             <div class="bc font-bold text-xs text-white uppercase tracking-wider">MLB</div>
-            <div class="mono text-xs text-gray-600 mt-0.5">Daily Picks</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Daily Picks</div>
           </div>
-          <div class="p-4 rounded-xl text-center" style="background:var(--panel);border:1px solid var(--bord2);">
+          <div class="wstat rounded-xl p-4 text-center sport-c" style="border:1px solid var(--bord2);">
             <div class="text-3xl mb-2">🏒</div>
             <div class="bc font-bold text-xs text-white uppercase tracking-wider">NHL</div>
-            <div class="mono text-xs text-gray-600 mt-0.5">Daily Picks</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Daily Picks</div>
           </div>
         </div>
 
-        <!-- Win streak card -->
-        <div class="p-4 rounded-2xl flex items-center justify-between" style="background:var(--panel);border:1px solid rgba(34,197,94,.2);">
+        <!-- Win streak widget -->
+        <div class="glass-green rounded-2xl p-4 flex items-center justify-between shine">
           <div>
-            <div class="mono text-xs text-gray-600 mb-1">Current Win Streak</div>
-            <div class="bc font-black text-3xl" style="color:var(--green);">7-GAME W</div>
-            <div class="mono text-xs text-gray-500 mt-0.5">Across all sports · Rolling</div>
+            <div class="mono text-xs mb-1" style="color:rgba(255,255,255,0.3);">Current Win Streak</div>
+            <div class="bc font-black text-3xl neon-green" style="color:var(--green);">7-GAME W</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.35);">Across all sports · Rolling</div>
           </div>
           <div class="text-right">
-            <div class="mono text-xs text-gray-600 mb-1">Season Record</div>
-            <div class="bc font-black text-2xl text-white" id="recDisplay">64% W/L</div>
-            <div class="mono text-xs text-gray-500 mt-0.5">Verified track record</div>
+            <div class="mono text-xs mb-1" style="color:rgba(255,255,255,0.3);">Season Record</div>
+            <div class="bc font-black text-2xl text-white flip-num" id="recDisplay">64% W/L</div>
+            <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.35);">Verified track record</div>
           </div>
         </div>
       </div>
@@ -366,67 +589,128 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
+<!-- ════════════════════════════════
      GOLD TICKER
-═══════════════════════════ -->
-<div class="py-3 overflow-hidden" style="background:linear-gradient(90deg,#8B6914,var(--gold),#D4A017,var(--gold),#8B6914);">
+════════════════════════════════ -->
+<div class="py-3.5 overflow-hidden" style="background:linear-gradient(90deg,#6B4900,#D4A017,#F0BA20,#D4A017,#6B4900);">
   <div class="flex whitespace-nowrap">
-    <div class="otb-tick flex items-center gap-10 px-6">
+    <div class="otb-tick flex items-center gap-12 px-6">
       <span class="text-black bc font-black text-sm uppercase tracking-widest">🏆 Off The Board — Elite Handicappers</span>
-      <span class="text-black opacity-40">◆</span>
+      <span class="text-black opacity-30">◆</span>
       <span class="text-black bc font-black text-sm uppercase tracking-widest">4.9★ · 130 Reviews · Whop Verified</span>
-      <span class="text-black opacity-40">◆</span>
+      <span class="text-black opacity-30">◆</span>
       <span class="text-black bc font-black text-sm uppercase tracking-widest">NBA · NFL · MLB · NHL · Daily Picks</span>
-      <span class="text-black opacity-40">◆</span>
+      <span class="text-black opacity-30">◆</span>
       <span class="text-black bc font-black text-sm uppercase tracking-widest">High Level Insights & Advice · Best Plays Daily</span>
-      <span class="text-black opacity-40">◆</span>
+      <span class="text-black opacity-30">◆</span>
       <span class="text-black bc font-black text-sm uppercase tracking-widest">696 Members · $20 / 3 Days · 30% Affiliate</span>
-      <span class="text-black opacity-40">◆</span>
+      <span class="text-black opacity-30">◆</span>
       <span class="text-black bc font-black text-sm uppercase tracking-widest">Teaching You How To Capitalize In Sports Betting</span>
-      <span class="text-black opacity-40">◆</span>
-      <!-- dupe -->
+      <span class="text-black opacity-30">◆</span>
       <span class="text-black bc font-black text-sm uppercase tracking-widest">🏆 Off The Board — Elite Handicappers</span>
-      <span class="text-black opacity-40">◆</span>
+      <span class="text-black opacity-30">◆</span>
       <span class="text-black bc font-black text-sm uppercase tracking-widest">4.9★ · 130 Reviews · Whop Verified</span>
-      <span class="text-black opacity-40">◆</span>
+      <span class="text-black opacity-30">◆</span>
       <span class="text-black bc font-black text-sm uppercase tracking-widest">NBA · NFL · MLB · NHL · Daily Picks</span>
-      <span class="text-black opacity-40">◆</span>
-      <span class="text-black bc font-black text-sm uppercase tracking-widest">High Level Insights & Advice · Best Plays Daily</span>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════
-     ABOUT OTB
-═══════════════════════════ -->
-<section id="about" class="py-28 relative overflow-hidden" style="background:var(--ink2);">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+<!-- ════════════════════════════════
+     ABOUT OTB — SVG CHART INSTEAD OF IMAGE
+════════════════════════════════ -->
+<section id="about" class="py-28 relative overflow-hidden" style="background:var(--deep);">
+  <div class="gold-line absolute top-0 left-0 right-0"></div>
+  <div class="absolute" style="width:500px;height:500px;top:-100px;right:-200px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,0.06),transparent 65%);filter:blur(60px);pointer-events:none;"></div>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
     <div class="grid lg:grid-cols-2 gap-20 items-center">
 
-      <div class="relative">
-        <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=80&auto=format&fit=crop"
-             alt="Sports betting analysis" class="rounded-2xl w-full h-[500px] object-cover opacity-75"/>
-        <div class="absolute inset-0 rounded-2xl" style="background:linear-gradient(135deg,rgba(212,160,23,.12),transparent,rgba(34,197,94,.06));pointer-events:none;"></div>
+      <!-- Abstract win-rate visualization — NO stock image -->
+      <div class="relative reveal-r reveal">
+        <div class="glass rounded-2xl overflow-hidden p-8" style="height:500px;">
+          <div class="mono text-xs uppercase tracking-[0.2em] mb-2" style="color:rgba(212,160,23,0.6);">OTB Verified Performance Dashboard</div>
+          <div class="mono text-xs mb-6" style="color:rgba(255,255,255,0.25);">Rolling season record · All sports combined</div>
 
-        <!-- Floating record card -->
-        <div class="absolute -bottom-6 -right-6 p-5 rounded-2xl" style="background:var(--panel);border:1px solid rgba(212,160,23,.4);box-shadow:0 10px 50px rgba(0,0,0,.6);">
-          <div class="mono text-xs uppercase tracking-widest mb-1" style="color:var(--gold2);">Verified Track Record</div>
-          <div class="bc font-black text-3xl text-white">4.9 / 5.0</div>
-          <div class="mono text-xs text-gray-500 mt-1">Based on 130 Whop reviews</div>
+          <!-- SVG win-rate chart -->
+          <svg class="w-full h-56" viewBox="0 0 500 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Grid -->
+            <line x1="0"   y1="50"  x2="500" y2="50"  stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0"   y1="100" x2="500" y2="100" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0"   y1="150" x2="500" y2="150" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0"   y1="200" x2="500" y2="200" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <!-- Y labels -->
+            <text x="0" y="48"  fill="rgba(255,255,255,0.2)" font-size="8" font-family="Roboto Mono,monospace">70%</text>
+            <text x="0" y="98"  fill="rgba(255,255,255,0.2)" font-size="8" font-family="Roboto Mono,monospace">60%</text>
+            <text x="0" y="148" fill="rgba(255,255,255,0.2)" font-size="8" font-family="Roboto Mono,monospace">50%</text>
+            <text x="0" y="198" fill="rgba(255,255,255,0.2)" font-size="8" font-family="Roboto Mono,monospace">40%</text>
+            <!-- Win-rate area fill -->
+            <path d="M22 140 C 60 130, 90 90, 130 80 S 200 60, 240 70 S 300 90, 340 65 S 400 50, 480 45 L 480 210 L 22 210 Z"
+                  fill="url(#winFill)"/>
+            <!-- Win-rate line -->
+            <path d="M22 140 C 60 130, 90 90, 130 80 S 200 60, 240 70 S 300 90, 340 65 S 400 50, 480 45"
+                  stroke="url(#winGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Data points -->
+            <circle cx="130" cy="80"  r="4" fill="#D4A017"/>
+            <circle cx="240" cy="70"  r="4" fill="#D4A017"/>
+            <circle cx="340" cy="65"  r="4" fill="#D4A017"/>
+            <circle cx="480" cy="45"  r="5" fill="#22C55E">
+              <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+            </circle>
+            <!-- X labels -->
+            <text x="20"  y="215" fill="rgba(255,255,255,0.2)" font-size="8" font-family="Roboto Mono,monospace">Jan</text>
+            <text x="120" y="215" fill="rgba(255,255,255,0.2)" font-size="8" font-family="Roboto Mono,monospace">Mar</text>
+            <text x="240" y="215" fill="rgba(255,255,255,0.2)" font-size="8" font-family="Roboto Mono,monospace">Jun</text>
+            <text x="360" y="215" fill="rgba(255,255,255,0.2)" font-size="8" font-family="Roboto Mono,monospace">Sep</text>
+            <text x="456" y="215" fill="rgba(255,255,255,0.2)" font-size="8" font-family="Roboto Mono,monospace">Now</text>
+            <text x="460" y="40" fill="#22C55E" font-size="8" font-family="Roboto Mono,monospace">64%</text>
+            <defs>
+              <linearGradient id="winGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="#D4A017"/>
+                <stop offset="100%" stop-color="#22C55E"/>
+              </linearGradient>
+              <linearGradient id="winFill" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%"   stop-color="#D4A017" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#D4A017" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- Bottom stat cards -->
+          <div class="grid grid-cols-3 gap-3 mt-4">
+            <div class="text-center p-3 rounded-xl" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);">
+              <div class="bc font-black text-xl gold-text">4.9★</div>
+              <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Rating</div>
+            </div>
+            <div class="text-center p-3 rounded-xl" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);">
+              <div class="bc font-black text-xl text-white">130</div>
+              <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Reviews</div>
+            </div>
+            <div class="text-center p-3 rounded-xl" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);">
+              <div class="bc font-black text-xl green-text">696</div>
+              <div class="mono text-xs mt-0.5" style="color:rgba(255,255,255,0.3);">Members</div>
+            </div>
+          </div>
         </div>
 
-        <!-- 696 badge -->
-        <div class="absolute top-6 left-6 p-4 rounded-xl" style="background:rgba(8,10,6,.92);border:1px solid var(--border);">
-          <div class="mono text-xs text-gray-600 mb-1">Active Members</div>
+        <!-- Floating badges -->
+        <div class="absolute -bottom-6 -right-6 p-5 rounded-2xl" style="background:linear-gradient(135deg,rgba(22,28,38,0.96),rgba(12,16,22,0.98));border:1px solid rgba(212,160,23,0.35);box-shadow:0 10px 50px rgba(0,0,0,0.6);">
+          <div class="mono text-xs uppercase tracking-widest mb-1" style="color:var(--gold2);">Verified Track Record</div>
+          <div class="bc font-black text-3xl text-white">4.9 / 5.0</div>
+          <div class="mono text-xs mt-1" style="color:rgba(255,255,255,0.3);">Based on 130 Whop reviews</div>
+        </div>
+
+        <div class="absolute top-6 left-6 p-4 rounded-xl" style="background:rgba(6,8,10,0.92);border:1px solid rgba(212,160,23,0.22);">
+          <div class="mono text-xs mb-1" style="color:rgba(255,255,255,0.3);">Active Members</div>
           <div class="bc font-black text-3xl" style="color:var(--gold2);">696</div>
-          <div class="mono text-xs text-gray-500">& Growing</div>
+          <div class="mono text-xs" style="color:rgba(255,255,255,0.3);">& Growing</div>
         </div>
       </div>
 
-      <div>
+      <div class="reveal-l reveal">
         <div class="flex items-center gap-3 mb-5">
-          <div class="h-0.5 w-12" style="background:linear-gradient(90deg,var(--gold),transparent);"></div>
-          <span class="mono text-xs uppercase tracking-widest font-bold" style="color:var(--gold2);">Who We Are</span>
+          <div class="h-px w-12" style="background:linear-gradient(90deg,var(--gold),transparent);"></div>
+          <span class="mono text-xs uppercase tracking-[0.2em] font-bold" style="color:var(--gold2);">Who We Are</span>
         </div>
         <h2 class="bc font-black leading-none mb-6" style="font-size:clamp(3rem,6vw,5.5rem);line-height:.85;">
           <span class="text-white">ELITE</span><br/>
@@ -434,44 +718,42 @@
           <span class="text-white">DAILY BEST</span><br/>
           <span class="green-text">PLAYS.</span>
         </h2>
-        <p class="text-gray-400 leading-relaxed mb-5" style="font-size:1.05rem;">
-          Off The Board is a <strong class="text-white">highly skilled group of professional handicappers</strong> who bring elite-level insights and advice to their betting community every single day. We cover every major sport — NBA, NFL, MLB, NHL — analyzing matchups, lines, public betting percentages, sharp money movement, injury reports, and advanced statistical models before releasing our very best plays to members.
+        <p class="leading-relaxed mb-5" style="font-size:1.05rem;color:rgba(255,255,255,0.55);">
+          Off The Board is a <strong class="text-white font-semibold">highly skilled group of professional handicappers</strong> who bring elite-level insights and advice to their betting community every single day. We cover every major sport — NBA, NFL, MLB, NHL — analyzing matchups, lines, public betting percentages, sharp money movement, injury reports, and advanced statistical models before releasing our very best plays to members.
         </p>
-        <p class="text-gray-400 leading-relaxed mb-5" style="font-size:1.05rem;">
-          Our name is a statement. When a game goes "Off The Board" at a sportsbook, it's because the books are afraid of the information that's surfaced — too much injury news, too much sharp money on one side, or a line they can no longer confidently set. We built a community around that same sharp-money mentality: <strong class="text-white">operating with the intelligence and discipline that makes sportsbooks uncomfortable.</strong>
+        <p class="leading-relaxed mb-5" style="font-size:1.05rem;color:rgba(255,255,255,0.55);">
+          Our name is a statement. When a game goes "Off The Board" at a sportsbook, it's because the books are afraid of the information that's surfaced — too much injury news, too much sharp money on one side, or a line they can no longer confidently set. We built a community around that same sharp-money mentality: <strong class="text-white font-semibold">operating with the intelligence and discipline that makes sportsbooks uncomfortable.</strong>
         </p>
-        <p class="text-gray-400 leading-relaxed mb-8" style="font-size:1.05rem;">
+        <p class="leading-relaxed mb-8" style="font-size:1.05rem;color:rgba(255,255,255,0.55);">
           With a 4.9★ rating across 130 verified Whop reviews and 696 active members, Off The Board has established itself as one of the most trusted and accurate sports betting communities on the platform. Our plays are released daily, with full analysis and reasoning — not just a pick, but the <em>why</em> behind every selection.
         </p>
 
-        <!-- Key differentiators -->
         <div class="space-y-3 mb-8">
-          <div class="flex items-start gap-3">
-            <span class="text-lg mt-0.5">🎯</span>
+          <div class="flex items-start gap-3 p-4 rounded-xl shine" style="background:rgba(212,160,23,0.04);border:1px solid rgba(212,160,23,0.1);">
+            <span class="text-xl mt-0.5">🎯</span>
             <div>
               <div class="font-semibold text-white text-sm">Team of Multiple Expert Handicappers</div>
-              <div class="text-xs text-gray-500 leading-relaxed mt-0.5">Not a single-person operation — OTB is a dedicated team of skilled cappers, each bringing specialized expertise in different sports and bet types. Collective intelligence produces superior picks.</div>
+              <div class="text-xs leading-relaxed mt-0.5" style="color:rgba(255,255,255,0.4);">Not a single-person operation — OTB is a dedicated team of skilled cappers, each bringing specialized expertise in different sports and bet types. Collective intelligence produces superior picks.</div>
             </div>
           </div>
-          <div class="flex items-start gap-3">
-            <span class="text-lg mt-0.5">📊</span>
+          <div class="flex items-start gap-3 p-4 rounded-xl shine" style="background:rgba(212,160,23,0.04);border:1px solid rgba(212,160,23,0.1);">
+            <span class="text-xl mt-0.5">📊</span>
             <div>
               <div class="font-semibold text-white text-sm">High-Level Analysis, Not Gut Feelings</div>
-              <div class="text-xs text-gray-500 leading-relaxed mt-0.5">Every pick comes from real research — line movement, sharp action, injury impact, situational angles, and advanced stats. We deliver the insights, not just the ticket.</div>
+              <div class="text-xs leading-relaxed mt-0.5" style="color:rgba(255,255,255,0.4);">Every pick comes from real research — line movement, sharp action, injury impact, situational angles, and advanced stats. We deliver the insights, not just the ticket.</div>
             </div>
           </div>
-          <div class="flex items-start gap-3">
-            <span class="text-lg mt-0.5">💰</span>
+          <div class="flex items-start gap-3 p-4 rounded-xl shine" style="background:rgba(212,160,23,0.04);border:1px solid rgba(212,160,23,0.1);">
+            <span class="text-xl mt-0.5">💰</span>
             <div>
               <div class="font-semibold text-white text-sm">Affordable Entry Point — $20 for 3 Days</div>
-              <div class="text-xs text-gray-500 leading-relaxed mt-0.5">Try OTB risk-free for under $7 per day. If one pick cashes, it pays for your membership multiple times over. Low cost, high value — maximum edge.</div>
+              <div class="text-xs leading-relaxed mt-0.5" style="color:rgba(255,255,255,0.4);">Try OTB risk-free for under $7 per day. If one pick cashes, it pays for your membership multiple times over. Low cost, high value — maximum edge.</div>
             </div>
           </div>
         </div>
 
         <a href="https://whop.com/off-the-board/off-the-board?a=digitalartlab" target="_blank"
-           class="btn-gold inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bc font-black text-base uppercase tracking-wider"
-           style="letter-spacing:.08em;">
+           class="btn-vegas inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bc font-black text-base uppercase tracking-wider">
           Join OTB — $20 / 3 Days →
         </a>
       </div>
@@ -479,128 +761,176 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     SPORTS COVERED
-═══════════════════════════ -->
-<section id="sports" class="py-28 relative overflow-hidden" style="background:var(--panel);">
+<!-- ════════════════════════════════
+     SPORTS COVERED — ABSTRACT GRADIENT TILES
+════════════════════════════════ -->
+<section id="sports" class="py-28 relative overflow-hidden" style="background:var(--surface);">
+  <div class="gold-line absolute top-0 left-0 right-0"></div>
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="text-center mb-16">
       <div class="flex items-center justify-center gap-3 mb-5">
-        <div class="h-0.5 w-16" style="background:linear-gradient(90deg,transparent,var(--gold));"></div>
-        <span class="mono text-xs uppercase tracking-widest font-bold" style="color:var(--gold2);">Sports Covered</span>
-        <div class="h-0.5 w-16" style="background:linear-gradient(90deg,var(--gold),transparent);"></div>
+        <div class="h-px w-16" style="background:linear-gradient(90deg,transparent,var(--gold));"></div>
+        <span class="mono text-xs uppercase tracking-[0.25em] font-bold" style="color:var(--gold2);">Sports Covered</span>
+        <div class="h-px w-16" style="background:linear-gradient(90deg,var(--gold),transparent);"></div>
       </div>
       <h2 class="bc font-black leading-none" style="font-size:clamp(3rem,6vw,6rem);line-height:.85;">
         <span class="text-white">EVERY SPORT.</span><br/>
         <span class="gold-text">EVERY DAY.</span>
       </h2>
-      <p class="text-gray-500 max-w-lg mx-auto mt-5">OTB's team of handicappers covers the full calendar of American sports — so there's always a sharp play available no matter what's on the board.</p>
+      <p class="max-w-lg mx-auto mt-5" style="color:rgba(255,255,255,0.4);">OTB's team of handicappers covers the full calendar of American sports — so there's always a sharp play available no matter what's on the board.</p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-      <!-- NBA -->
-      <div class="sport-card rounded-2xl overflow-hidden reveal">
-        <img src="https://plus.unsplash.com/premium_photo-1664303164311-30c7a2a11e58?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8TkJBfGVufDB8fDB8fHww"
-             alt="NBA basketball court" class="w-full h-36 object-cover opacity-70"/>
-        <div class="p-5">
-          <div class="flex items-center gap-2 mb-3">
+
+      <!-- NBA — abstract court lines SVG -->
+      <div class="sport-c glass rounded-2xl overflow-hidden reveal" style="border:1px solid var(--bord2);">
+        <div class="relative h-44" style="background:linear-gradient(135deg,#1a0d00,#3a1e00,#5a2e00);">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 250 176" fill="none">
+            <ellipse cx="125" cy="88" rx="80" ry="60" stroke="rgba(212,160,23,0.18)" stroke-width="1.5"/>
+            <ellipse cx="125" cy="88" rx="50" ry="35" stroke="rgba(212,160,23,0.1)" stroke-width="1" stroke-dasharray="5 4"/>
+            <circle cx="125" cy="88" r="15" stroke="rgba(212,160,23,0.2)" stroke-width="1.5" fill="none"/>
+            <line x1="25" y1="88" x2="225" y2="88" stroke="rgba(212,160,23,0.12)" stroke-width="1"/>
+            <line x1="125" y1="20" x2="125" y2="156" stroke="rgba(212,160,23,0.08)" stroke-width="1"/>
+            <rect x="80" y="60" width="90" height="56" stroke="rgba(212,160,23,0.12)" stroke-width="1" fill="none"/>
+            <text x="125" y="155" fill="rgba(212,160,23,0.15)" font-size="50" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="900">NBA</text>
+          </svg>
+          <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent,rgba(15,19,24,0.95));"></div>
+          <div class="absolute bottom-3 left-4 flex items-center gap-2">
             <span class="text-2xl">🏀</span>
             <div class="bc font-black text-2xl text-white uppercase">NBA</div>
           </div>
-          <p class="text-gray-500 text-xs leading-relaxed mb-3">Daily NBA picks covering spreads, moneylines, totals, and player props. OTB analyzes matchup advantages, pace metrics, rest situations, and sharp line movement to find the best basketball value every night.</p>
+          <div class="absolute top-3 right-3"><span class="pill-w mono text-xs px-2 py-1 rounded-lg font-bold">DAILY</span></div>
+        </div>
+        <div class="p-5">
+          <p class="text-xs leading-relaxed mb-3" style="color:rgba(255,255,255,0.4);">Daily NBA picks covering spreads, moneylines, totals, and player props. OTB analyzes matchup advantages, pace metrics, rest situations, and sharp line movement to find the best basketball value every night.</p>
           <div class="space-y-1.5">
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Against the spread (ATS)</div>
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Moneyline & totals</div>
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Player props & parlays</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Against the spread (ATS)</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Moneyline & totals</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Player props & parlays</div>
           </div>
         </div>
       </div>
 
-      <!-- NFL -->
-      <div class="sport-card rounded-2xl overflow-hidden reveal">
-        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=600&q=80&auto=format&fit=crop"
-             alt="NFL football stadium" class="w-full h-36 object-cover opacity-70"/>
-        <div class="p-5">
-          <div class="flex items-center gap-2 mb-3">
+      <!-- NFL — abstract field lines -->
+      <div class="sport-c glass rounded-2xl overflow-hidden reveal" style="border:1px solid var(--bord2);transition-delay:.1s;">
+        <div class="relative h-44" style="background:linear-gradient(135deg,#0a1a08,#1a3a12,#0a2010);">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 250 176" fill="none">
+            <rect x="20" y="30" width="210" height="116" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
+            <line x1="20" y1="88" x2="230" y2="88" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="62"  y1="30" x2="62"  y2="146" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="104" y1="30" x2="104" y2="146" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="146" y1="30" x2="146" y2="146" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="188" y1="30" x2="188" y2="146" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <path d="M95 50 L125 30 L155 50 L155 100 L125 120 L95 100 Z" stroke="rgba(34,197,94,0.15)" stroke-width="1.5" fill="none"/>
+            <text x="125" y="155" fill="rgba(255,255,255,0.06)" font-size="50" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="900">NFL</text>
+          </svg>
+          <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent,rgba(15,19,24,0.95));"></div>
+          <div class="absolute bottom-3 left-4 flex items-center gap-2">
             <span class="text-2xl">🏈</span>
             <div class="bc font-black text-2xl text-white uppercase">NFL</div>
           </div>
-          <p class="text-gray-500 text-xs leading-relaxed mb-3">The NFL is the most-bet sport in America — and the most manipulated by the books. OTB's NFL analysis goes beyond public consensus, tracking sharp money, injury impact on spreads, weather conditions, and coaching matchup tendencies that the public overlooks.</p>
+          <div class="absolute top-3 right-3"><span class="pill-p mono text-xs px-2 py-1 rounded-lg font-bold">WEEKLY</span></div>
+        </div>
+        <div class="p-5">
+          <p class="text-xs leading-relaxed mb-3" style="color:rgba(255,255,255,0.4);">The NFL is the most-bet sport in America — and the most manipulated by the books. OTB's NFL analysis goes beyond public consensus, tracking sharp money, injury impact on spreads, weather conditions, and coaching matchup tendencies that the public overlooks.</p>
           <div class="space-y-1.5">
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Spreads, MLs, totals weekly</div>
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Sharp money tracking</div>
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Weather & situational angles</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Spreads, MLs, totals weekly</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Sharp money tracking</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Weather & situational angles</div>
           </div>
         </div>
       </div>
 
-      <!-- MLB -->
-      <div class="sport-card rounded-2xl overflow-hidden reveal">
-        <img src="https://images.unsplash.com/photo-1471295253337-3ceaaedca402?w=600&q=80&auto=format&fit=crop"
-             alt="MLB baseball stadium" class="w-full h-36 object-cover opacity-70"/>
-        <div class="p-5">
-          <div class="flex items-center gap-2 mb-3">
+      <!-- MLB — abstract diamond -->
+      <div class="sport-c glass rounded-2xl overflow-hidden reveal" style="border:1px solid var(--bord2);transition-delay:.2s;">
+        <div class="relative h-44" style="background:linear-gradient(135deg,#0a0a1a,#1a1a3a,#0d1028);">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 250 176" fill="none">
+            <polygon points="125,30 195,88 125,146 55,88" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" fill="none"/>
+            <polygon points="125,60 160,88 125,116 90,88" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
+            <circle cx="125" cy="88" r="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="125" y1="30" x2="125" y2="146" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="55" y1="88" x2="195" y2="88" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <text x="125" y="155" fill="rgba(255,255,255,0.06)" font-size="50" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="900">MLB</text>
+          </svg>
+          <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent,rgba(15,19,24,0.95));"></div>
+          <div class="absolute bottom-3 left-4 flex items-center gap-2">
             <span class="text-2xl">⚾</span>
             <div class="bc font-black text-2xl text-white uppercase">MLB</div>
           </div>
-          <p class="text-gray-500 text-xs leading-relaxed mb-3">Baseball is a grinder's game — 162 games means 162 opportunities to find value every season. OTB leverages advanced pitching metrics, bullpen usage trends, park factors, weather, and run-line value to identify profitable spots across the full MLB calendar.</p>
+          <div class="absolute top-3 right-3"><span class="pill-p mono text-xs px-2 py-1 rounded-lg font-bold">3× RETAIL</span></div>
+        </div>
+        <div class="p-5">
+          <p class="text-xs leading-relaxed mb-3" style="color:rgba(255,255,255,0.4);">Baseball is a grinder's game — 162 games means 162 opportunities to find value every season. OTB leverages advanced pitching metrics, bullpen usage trends, park factors, weather, and run-line value to identify profitable spots across the full MLB calendar.</p>
           <div class="space-y-1.5">
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Run line & moneyline value</div>
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Pitcher metrics & matchups</div>
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Park factors & weather</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Run line & moneyline value</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Pitcher metrics & matchups</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Park factors & weather</div>
           </div>
         </div>
       </div>
 
-      <!-- NHL -->
-      <div class="sport-card rounded-2xl overflow-hidden reveal">
-        <img src="https://images.unsplash.com/photo-1515703407324-5f753afd8be8?w=600&q=80&auto=format&fit=crop"
-             alt="NHL hockey rink" class="w-full h-36 object-cover opacity-70"/>
-        <div class="p-5">
-          <div class="flex items-center gap-2 mb-3">
+      <!-- NHL — abstract ice rink -->
+      <div class="sport-c glass rounded-2xl overflow-hidden reveal" style="border:1px solid var(--bord2);transition-delay:.3s;">
+        <div class="relative h-44" style="background:linear-gradient(135deg,#050a1a,#0a1530,#060e22);">
+          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 250 176" fill="none">
+            <rect x="25" y="35" width="200" height="106" rx="20" stroke="rgba(100,150,255,0.12)" stroke-width="1.5" fill="none"/>
+            <ellipse cx="125" cy="88" rx="25" ry="18" stroke="rgba(100,150,255,0.1)" stroke-width="1"/>
+            <line x1="125" y1="35" x2="125" y2="141" stroke="rgba(100,150,255,0.08)" stroke-width="1"/>
+            <line x1="25"  y1="88" x2="225" y2="88" stroke="rgba(100,150,255,0.06)" stroke-width="1"/>
+            <circle cx="70"  cy="65"  r="6" stroke="rgba(100,150,255,0.12)" stroke-width="1" fill="none"/>
+            <circle cx="70"  cy="111" r="6" stroke="rgba(100,150,255,0.12)" stroke-width="1" fill="none"/>
+            <circle cx="180" cy="65"  r="6" stroke="rgba(100,150,255,0.12)" stroke-width="1" fill="none"/>
+            <circle cx="180" cy="111" r="6" stroke="rgba(100,150,255,0.12)" stroke-width="1" fill="none"/>
+            <text x="125" y="155" fill="rgba(100,150,255,0.08)" font-size="50" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="900">NHL</text>
+          </svg>
+          <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent,rgba(15,19,24,0.95));"></div>
+          <div class="absolute bottom-3 left-4 flex items-center gap-2">
             <span class="text-2xl">🏒</span>
             <div class="bc font-black text-2xl text-white uppercase">NHL</div>
           </div>
-          <p class="text-gray-500 text-xs leading-relaxed mb-3">Hockey is one of the most undervalued betting markets — public bettors ignore it, which means the sharp money is more concentrated and easier to track. OTB's NHL coverage identifies goaltending mismatches, travel fatigue, and puck-line value that the casual bettor misses completely.</p>
+          <div class="absolute top-3 right-3"><span class="pill-w mono text-xs px-2 py-1 rounded-lg font-bold">VALUE</span></div>
+        </div>
+        <div class="p-5">
+          <p class="text-xs leading-relaxed mb-3" style="color:rgba(255,255,255,0.4);">Hockey is one of the most undervalued betting markets — public bettors ignore it, which means the sharp money is more concentrated and easier to track. OTB's NHL coverage identifies goaltending mismatches, travel fatigue, and puck-line value that the casual bettor misses completely.</p>
           <div class="space-y-1.5">
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Puck line & moneyline</div>
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Goalie matchup analysis</div>
-            <div class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">▸</span> Travel & back-to-back spots</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Puck line & moneyline</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Goalie matchup analysis</div>
+            <div class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">▸</span> Travel & back-to-back spots</div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Additional sports row -->
-    <div class="mt-8 p-6 rounded-2xl" style="background:var(--panel2);border:1px solid var(--bord2);">
+    <div class="mt-8 p-6 rounded-2xl reveal glass shine" style="border:1px solid var(--bord2);">
       <div class="mono text-xs uppercase tracking-widest mb-4 font-bold" style="color:var(--gold2);">Additional Coverage When Lines Are Available</div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="flex items-center gap-3">
           <span class="text-2xl">🏀</span>
           <div>
             <div class="bc font-bold text-sm text-white uppercase">NCAAB</div>
-            <div class="mono text-xs text-gray-600">College Basketball</div>
+            <div class="mono text-xs" style="color:rgba(255,255,255,0.3);">College Basketball</div>
           </div>
         </div>
         <div class="flex items-center gap-3">
           <span class="text-2xl">🏈</span>
           <div>
             <div class="bc font-bold text-sm text-white uppercase">NCAAF</div>
-            <div class="mono text-xs text-gray-600">College Football</div>
+            <div class="mono text-xs" style="color:rgba(255,255,255,0.3);">College Football</div>
           </div>
         </div>
         <div class="flex items-center gap-3">
           <span class="text-2xl">⚽</span>
           <div>
             <div class="bc font-bold text-sm text-white uppercase">Soccer</div>
-            <div class="mono text-xs text-gray-600">Major leagues</div>
+            <div class="mono text-xs" style="color:rgba(255,255,255,0.3);">Major leagues</div>
           </div>
         </div>
         <div class="flex items-center gap-3">
           <span class="text-2xl">🥊</span>
           <div>
             <div class="bc font-bold text-sm text-white uppercase">MMA/UFC</div>
-            <div class="mono text-xs text-gray-600">Fight cards</div>
+            <div class="mono text-xs" style="color:rgba(255,255,255,0.3);">Fight cards</div>
           </div>
         </div>
       </div>
@@ -608,223 +938,317 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
+<!-- ════════════════════════════════
+     TIKTOK PROOF SECTION
+════════════════════════════════ -->
+<section class="py-28 relative overflow-hidden" style="background:var(--deep);">
+  <div class="gold-line absolute top-0 left-0 right-0"></div>
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
+
+    <div class="flex flex-col md:flex-row justify-between items-end mb-14 reveal">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="gdot"></div>
+          <span class="mono text-xs uppercase tracking-[0.25em] font-bold" style="color:var(--green);">Live Picks · Real Results</span>
+        </div>
+        <h3 class="bc font-black leading-none" style="font-size:clamp(2.5rem,5vw,4rem);">
+          <span class="text-white">THE COMMUNITY</span><br/>
+          <span class="green-text">IN ACTION.</span>
+        </h3>
+      </div>
+      <p class="mono text-xs max-w-xs mt-6 md:mt-0 leading-relaxed uppercase" style="color:rgba(255,255,255,0.3);">
+        Replace these TikTok links with OTB's own videos. Client swaps src links after delivery.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div class="reveal glass rounded-2xl p-4 sport-c shine" style="border:1px solid var(--bord);">
+        <div class="tt-wrap w-full" style="aspect-ratio:9/16;">
+          <!-- REPLACE: sports betting picks win reel -->
+          <iframe src="https://www.tiktok.com/embed/v2/7285188806950276384"
+            class="w-full h-full" allow="encrypted-media;" style="border:none;border-radius:16px;"></iframe>
+        </div>
+        <div class="mt-4 flex justify-between items-center">
+          <div>
+            <h4 class="bc font-black text-white uppercase tracking-wide text-sm">Daily Pick Win 🏆</h4>
+            <p class="mono text-xs mt-1" style="color:rgba(255,255,255,0.3);">NBA · Pick cashed · +EV</p>
+          </div>
+          <div class="gdot"></div>
+        </div>
+      </div>
+
+      <div class="reveal glass rounded-2xl p-4 sport-c shine" style="border:1px solid var(--bord);transition-delay:.1s;">
+        <div class="tt-wrap w-full" style="aspect-ratio:9/16;">
+          <!-- REPLACE: sharp money movement / line alert reel -->
+          <iframe src="https://www.tiktok.com/embed/v2/7300300438181317934"
+            class="w-full h-full" allow="encrypted-media;" style="border:none;border-radius:16px;"></iframe>
+        </div>
+        <div class="mt-4 flex justify-between items-center">
+          <div>
+            <h4 class="bc font-black text-white uppercase tracking-wide text-sm">Sharp Money Alert 📊</h4>
+            <p class="mono text-xs mt-1" style="color:rgba(255,255,255,0.3);">NFL · Line movement intel</p>
+          </div>
+          <div class="pdot"></div>
+        </div>
+      </div>
+
+      <div class="reveal glass rounded-2xl p-4 sport-c shine" style="border:1px solid var(--bord);transition-delay:.2s;">
+        <div class="tt-wrap w-full" style="aspect-ratio:9/16;">
+          <!-- REPLACE: community win celebration / results recap reel -->
+          <iframe src="https://www.tiktok.com/embed/v2/7145839958172699946"
+            class="w-full h-full" allow="encrypted-media;" style="border:none;border-radius:16px;"></iframe>
+        </div>
+        <div class="mt-4 flex justify-between items-center">
+          <div>
+            <h4 class="bc font-black text-white uppercase tracking-wide text-sm">Community Win 🎉</h4>
+            <p class="mono text-xs mt-1" style="color:rgba(255,255,255,0.3);">696 members profiting</p>
+          </div>
+          <div class="gdot"></div>
+        </div>
+      </div>
+
+    </div>
+    <p class="text-center mono text-xs mt-6 reveal" style="color:rgba(255,255,255,0.18);">↑ Replace TikTok iframe src links with OTB's own videos — client replaces after delivery ↑</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
      FEATURES
-═══════════════════════════ -->
-<section id="features" class="py-28 relative overflow-hidden" style="background:var(--ink);">
-  <div class="absolute" style="width:600px;height:600px;bottom:-200px;right:-200px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.08),transparent 65%);filter:blur(60px);pointer-events:none;"></div>
+════════════════════════════════ -->
+<section id="features" class="py-28 relative overflow-hidden" style="background:var(--surface);">
+  <div class="gold-line absolute top-0 left-0 right-0"></div>
   <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
     <div class="text-center mb-14">
       <h2 class="bc font-black leading-none" style="font-size:clamp(3rem,6vw,6rem);line-height:.85;">
         <span class="text-white">WHAT YOU GET</span><br/>
         <span class="gold-text">INSIDE OTB</span>
       </h2>
-      <p class="text-gray-500 max-w-lg mx-auto mt-5">Everything included with your Off The Board membership — the complete edge for capitalizing in sports betting.</p>
+      <p class="max-w-lg mx-auto mt-5" style="color:rgba(255,255,255,0.4);">Everything included with your Off The Board membership — the complete edge for capitalizing in sports betting.</p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
 
-      <div class="sport-card rounded-2xl p-7 reveal">
-        <div class="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.1);border:1px solid var(--border);">
+      <div class="sport-c glass rounded-2xl p-7 reveal shine" style="border:1px solid var(--bord2);">
+        <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.18);">
           <svg class="w-6 h-6" style="color:var(--gold2);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
         </div>
+        <div class="mono text-xs mb-2 font-bold uppercase tracking-[0.2em]" style="color:rgba(212,160,23,0.45);">FEATURE.01</div>
         <h3 class="bc font-black text-2xl text-white mb-3 uppercase">Daily Best Plays</h3>
-        <p class="text-gray-500 text-sm leading-relaxed mb-4">Our handicappers release their very best plays every single day — the picks they consider the highest-confidence, highest-value opportunities on the entire board. These aren't volume plays; they're surgical, selective, and backed by real analysis. Each play includes the pick, odds, reasoning, and key factors driving the selection — so you understand every bet you're making.</p>
+        <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,0.4);">Our handicappers release their very best plays every single day — the picks they consider the highest-confidence, highest-value opportunities on the entire board. These aren't volume plays; they're surgical, selective, and backed by real analysis. Each play includes the pick, odds, reasoning, and key factors driving the selection — so you understand every bet you're making.</p>
         <ul class="space-y-1.5">
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Selective, high-confidence picks daily</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Full reasoning with every release</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Released early for best line value</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Selective, high-confidence picks daily</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Full reasoning with every release</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Released early for best line value</li>
         </ul>
       </div>
 
-      <div class="sport-card rounded-2xl p-7 reveal">
-        <div class="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.1);border:1px solid var(--border);">
+      <div class="sport-c glass rounded-2xl p-7 reveal shine" style="border:1px solid var(--bord2);transition-delay:.1s;">
+        <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.18);">
           <svg class="w-6 h-6" style="color:var(--gold2);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
+        <div class="mono text-xs mb-2 font-bold uppercase tracking-[0.2em]" style="color:rgba(212,160,23,0.45);">FEATURE.02</div>
         <h3 class="bc font-black text-2xl text-white mb-3 uppercase">Sharp Money Intel</h3>
-        <p class="text-gray-500 text-sm leading-relaxed mb-4">Sportsbooks are afraid of sharp bettors — they're the ones who move lines. OTB tracks where the sharp money is going, identifies steam moves, reverse line movement, and key line changes that signal professional action. When a book pulls a game or moves a line dramatically, we're often already on the right side before the general public even notices the move.</p>
+        <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,0.4);">Sportsbooks are afraid of sharp bettors — they're the ones who move lines. OTB tracks where the sharp money is going, identifies steam moves, reverse line movement, and key line changes that signal professional action. When a book pulls a game or moves a line dramatically, we're often already on the right side before the general public even notices the move.</p>
         <ul class="space-y-1.5">
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Steam move & reverse line tracking</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Sharp vs. public money breakdown</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Professional betting patterns</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Steam move & reverse line tracking</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Sharp vs. public money breakdown</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Professional betting patterns</li>
         </ul>
       </div>
 
-      <div class="sport-card rounded-2xl p-7 reveal">
-        <div class="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.1);border:1px solid var(--border);">
+      <div class="sport-c glass rounded-2xl p-7 reveal shine" style="border:1px solid var(--bord2);transition-delay:.2s;">
+        <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.18);">
           <svg class="w-6 h-6" style="color:var(--gold2);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
+        <div class="mono text-xs mb-2 font-bold uppercase tracking-[0.2em]" style="color:rgba(212,160,23,0.45);">FEATURE.03</div>
         <h3 class="bc font-black text-2xl text-white mb-3 uppercase">Active Community</h3>
-        <p class="text-gray-500 text-sm leading-relaxed mb-4">A 696-member community of serious sports bettors who share insights, discuss lines, and celebrate wins together. OTB's community isn't a passive broadcast — it's an active betting network where members talk lines, share angles, and collectively track the board. The group intelligence of nearly 700 engaged bettors is itself a significant edge in any betting environment.</p>
+        <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,0.4);">A 696-member community of serious sports bettors who share insights, discuss lines, and celebrate wins together. OTB's community isn't a passive broadcast — it's an active betting network where members talk lines, share angles, and collectively track the board. The group intelligence of nearly 700 engaged bettors is itself a significant edge in any betting environment.</p>
         <ul class="space-y-1.5">
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> 696+ active bettors in the group</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Line discussions & live reactions</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Win celebrations & accountability</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> 696+ active bettors in the group</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Line discussions & live reactions</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Win celebrations & accountability</li>
         </ul>
       </div>
 
-      <div class="sport-card rounded-2xl p-7 reveal">
-        <div class="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.1);border:1px solid var(--border);">
+      <div class="sport-c glass rounded-2xl p-7 reveal shine" style="border:1px solid var(--bord2);">
+        <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.18);">
           <svg class="w-6 h-6" style="color:var(--gold2);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
+        <div class="mono text-xs mb-2 font-bold uppercase tracking-[0.2em]" style="color:rgba(212,160,23,0.45);">FEATURE.04</div>
         <h3 class="bc font-black text-2xl text-white mb-3 uppercase">Line Movement Alerts</h3>
-        <p class="text-gray-500 text-sm leading-relaxed mb-4">Timing is everything in sports betting. Getting a +3.5 versus a +2.5 can be the difference between a win and a loss on an ATS bet. OTB alerts members to significant line movements and bet-timing recommendations — helping you catch the best available number before the market adjusts, maximizing the value of every play released.</p>
+        <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,0.4);">Timing is everything in sports betting. Getting a +3.5 versus a +2.5 can be the difference between a win and a loss on an ATS bet. OTB alerts members to significant line movements and bet-timing recommendations — helping you catch the best available number before the market adjusts, maximizing the value of every play released.</p>
         <ul class="space-y-1.5">
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Real-time line movement alerts</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Bet-now vs. wait recommendations</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Opening number vs. closing line</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Real-time line movement alerts</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Bet-now vs. wait recommendations</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Opening number vs. closing line</li>
         </ul>
       </div>
 
-      <div class="sport-card rounded-2xl p-7 reveal">
-        <div class="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.1);border:1px solid var(--border);">
+      <div class="sport-c glass rounded-2xl p-7 reveal shine" style="border:1px solid var(--bord2);transition-delay:.1s;">
+        <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.18);">
           <svg class="w-6 h-6" style="color:var(--gold2);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
         </div>
+        <div class="mono text-xs mb-2 font-bold uppercase tracking-[0.2em]" style="color:rgba(212,160,23,0.45);">FEATURE.05</div>
         <h3 class="bc font-black text-2xl text-white mb-3 uppercase">Betting Education</h3>
-        <p class="text-gray-500 text-sm leading-relaxed mb-4">OTB doesn't just hand you fish — it teaches you how to fish. Beyond daily picks, the community provides education on reading lines, understanding vig, bankroll management, identifying traps set by sportsbooks, and how to evaluate a handicapper's track record. Members who engage with the educational side develop genuine betting sophistication over time.</p>
+        <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,0.4);">OTB doesn't just hand you fish — it teaches you how to fish. Beyond daily picks, the community provides education on reading lines, understanding vig, bankroll management, identifying traps set by sportsbooks, and how to evaluate a handicapper's track record. Members who engage with the educational side develop genuine betting sophistication over time.</p>
         <ul class="space-y-1.5">
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Line reading & vig education</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Bankroll management principles</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> How to evaluate cappers' records</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Line reading & vig education</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Bankroll management principles</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> How to evaluate cappers' records</li>
         </ul>
       </div>
 
-      <div class="sport-card rounded-2xl p-7 reveal">
-        <div class="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.1);border:1px solid var(--border);">
+      <div class="sport-c glass rounded-2xl p-7 reveal shine" style="border:1px solid var(--bord2);transition-delay:.2s;">
+        <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.18);">
           <svg class="w-6 h-6" style="color:var(--gold2);" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
+        <div class="mono text-xs mb-2 font-bold uppercase tracking-[0.2em]" style="color:rgba(212,160,23,0.45);">FEATURE.06</div>
         <h3 class="bc font-black text-2xl text-white mb-3 uppercase">All-Day Coverage</h3>
-        <p class="text-gray-500 text-sm leading-relaxed mb-4">The sports calendar never stops, and neither does OTB. From NBA early afternoon tipoffs to late-night West Coast NHL games, our team covers the full board from open to close. Members receive picks across every major time slot — morning, afternoon, and prime time — so there's always something actionable available during their betting window.</p>
+        <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,0.4);">The sports calendar never stops, and neither does OTB. From NBA early afternoon tipoffs to late-night West Coast NHL games, our team covers the full board from open to close. Members receive picks across every major time slot — morning, afternoon, and prime time — so there's always something actionable available during their betting window.</p>
         <ul class="space-y-1.5">
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Early afternoon to late night coverage</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Multiple sports every day</li>
-          <li class="flex items-center gap-2 text-xs text-gray-400"><span style="color:var(--gold2);">◆</span> Full season & postseason coverage</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Early afternoon to late night coverage</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Multiple sports every day</li>
+          <li class="flex items-center gap-2 text-xs" style="color:rgba(255,255,255,0.4);"><span style="color:var(--gold2);">◆</span> Full season & postseason coverage</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════
+<!-- ════════════════════════════════
      WHY OTB — THE EDGE
-═══════════════════════════ -->
-<section class="py-28 relative overflow-hidden" style="background:var(--panel);">
+════════════════════════════════ -->
+<section class="py-28 relative overflow-hidden" style="background:var(--deep);">
+  <div class="gold-line absolute top-0 left-0 right-0"></div>
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-      <div>
+      <div class="reveal">
         <div class="flex items-center gap-3 mb-5">
-          <div class="h-0.5 w-12" style="background:linear-gradient(90deg,var(--gold),transparent);"></div>
-          <span class="mono text-xs uppercase tracking-widest font-bold" style="color:var(--gold2);">The OTB Difference</span>
+          <div class="h-px w-12" style="background:linear-gradient(90deg,var(--gold),transparent);"></div>
+          <span class="mono text-xs uppercase tracking-[0.2em] font-bold" style="color:var(--gold2);">The OTB Difference</span>
         </div>
         <h2 class="bc font-black leading-none mb-6" style="font-size:clamp(3rem,5vw,5rem);line-height:.85;">
           <span class="text-white">WHY OTB</span><br/>
           <span class="gold-text">BEATS THE</span><br/>
           <span class="text-white">BOOKS.</span>
         </h2>
-        <p class="text-gray-400 leading-relaxed mb-8" style="font-size:1.05rem;">
-          Most sports betting communities are run by one person making gut-feel picks on a single sport. Off The Board was built differently — as a <strong class="text-white">collective of specialized handicappers</strong>, each expert in different markets, combining their analysis into a daily pick slate that covers the full board with precision. Here's what separates OTB from every other betting community:
+        <p class="leading-relaxed mb-8" style="font-size:1.05rem;color:rgba(255,255,255,0.55);">
+          Most sports betting communities are run by one person making gut-feel picks on a single sport. Off The Board was built differently — as a <strong class="text-white font-semibold">collective of specialized handicappers</strong>, each expert in different markets, combining their analysis into a daily pick slate that covers the full board with precision. Here's what separates OTB from every other betting community:
         </p>
 
         <div class="space-y-4">
-          <div class="p-5 rounded-xl" style="background:var(--panel2);border:1px solid var(--bord2);">
+          <div class="p-5 rounded-2xl shine sport-c" style="background:rgba(212,160,23,0.04);border:1px solid rgba(212,160,23,0.1);">
             <div class="flex items-start gap-3">
               <span class="text-xl mt-0.5">👥</span>
               <div>
                 <div class="bc font-bold text-white text-base mb-1 uppercase">Collective Expert Team</div>
-                <p class="text-gray-500 text-sm leading-relaxed">A single person can't be an expert in every sport. OTB's team structure means each sport gets a dedicated specialist — someone who lives and breathes that market, knows the nuances, and tracks the patterns that casual bettors never see.</p>
+                <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.4);">A single person can't be an expert in every sport. OTB's team structure means each sport gets a dedicated specialist — someone who lives and breathes that market, knows the nuances, and tracks the patterns that casual bettors never see.</p>
               </div>
             </div>
           </div>
-          <div class="p-5 rounded-xl" style="background:var(--panel2);border:1px solid var(--bord2);">
+          <div class="p-5 rounded-2xl shine sport-c" style="background:rgba(212,160,23,0.04);border:1px solid rgba(212,160,23,0.1);">
             <div class="flex items-start gap-3">
               <span class="text-xl mt-0.5">📈</span>
               <div>
                 <div class="bc font-bold text-white text-base mb-1 uppercase">Sharp-Side Methodology</div>
-                <p class="text-gray-500 text-sm leading-relaxed">OTB doesn't follow the public — we track where the sharps go. When 70% of tickets are on one side but the line moves the other way, that's sharp money in action. We identify and bet with the professionals, not against them.</p>
+                <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.4);">OTB doesn't follow the public — we track where the sharps go. When 70% of tickets are on one side but the line moves the other way, that's sharp money in action. We identify and bet with the professionals, not against them.</p>
               </div>
             </div>
           </div>
-          <div class="p-5 rounded-xl" style="background:var(--panel2);border:1px solid var(--bord2);">
+          <div class="p-5 rounded-2xl shine sport-c" style="background:rgba(212,160,23,0.04);border:1px solid rgba(212,160,23,0.1);">
             <div class="flex items-start gap-3">
               <span class="text-xl mt-0.5">🎯</span>
               <div>
                 <div class="bc font-bold text-white text-base mb-1 uppercase">Quality Over Volume</div>
-                <p class="text-gray-500 text-sm leading-relaxed">We release only our best plays — not 20 picks a day to appear active. Fewer, higher-conviction plays perform better over time. Our 4.9★ rating across 130 reviews validates that selectivity is our edge, not volume.</p>
+                <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.4);">We release only our best plays — not 20 picks a day to appear active. Fewer, higher-conviction plays perform better over time. Our 4.9★ rating across 130 reviews validates that selectivity is our edge, not volume.</p>
               </div>
             </div>
           </div>
-          <div class="p-5 rounded-xl" style="background:var(--panel2);border:1px solid var(--bord2);">
+          <div class="p-5 rounded-2xl shine sport-c" style="background:rgba(212,160,23,0.04);border:1px solid rgba(212,160,23,0.1);">
             <div class="flex items-start gap-3">
               <span class="text-xl mt-0.5">💎</span>
               <div>
                 <div class="bc font-bold text-white text-base mb-1 uppercase">Transparent, Verified Record</div>
-                <p class="text-gray-500 text-sm leading-relaxed">The 4.9★ rating on Whop across 130 independent reviews speaks for itself. We don't cherry-pick our record or hide our losses. The community accountability system on Whop keeps every handicapper honest, and OTB has thrived under it.</p>
+                <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.4);">The 4.9★ rating on Whop across 130 independent reviews speaks for itself. We don't cherry-pick our record or hide our losses. The community accountability system on Whop keeps every handicapper honest, and OTB has thrived under it.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="space-y-5">
-        <div class="relative rounded-2xl overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1613758403772-268da019247a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c3BvcnRzJTIwYW5hbHlzaXMlMjBzY3JlZW5zfGVufDB8fDB8fHww"
-               alt="Sports betting analysis screens" class="w-full h-52 object-cover opacity-70"/>
-          <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(212,160,23,.1),transparent);pointer-events:none;"></div>
-        </div>
+      <div class="space-y-5 reveal">
 
-        <!-- Bankroll guide -->
-        <div class="p-6 rounded-2xl" style="background:var(--panel2);border:1px solid rgba(212,160,23,.25);">
-          <div class="mono text-xs uppercase tracking-widest mb-4 font-bold" style="color:var(--gold2);">OTB Bankroll Discipline Framework</div>
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-400">Standard unit play</span>
-              <span class="mono font-bold" style="color:var(--gold2);">1–2% of bankroll</span>
+        <!-- Animated bankroll framework with progress bars -->
+        <div class="glass rounded-2xl p-6 shine" style="border:1px solid rgba(212,160,23,0.22);">
+          <div class="mono text-xs uppercase tracking-widest mb-5 font-bold" style="color:var(--gold2);">OTB Bankroll Discipline Framework</div>
+          <div class="space-y-5">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm" style="color:rgba(255,255,255,0.6);">Standard unit play</span>
+                <span class="mono font-bold text-sm" style="color:var(--gold2);">1–2% of bankroll</span>
+              </div>
+              <div class="h-1.5 rounded-full" style="background:rgba(255,255,255,0.06);">
+                <div class="pbar-fill" style="width:0%" data-width="30%"></div>
+              </div>
             </div>
-            <div class="h-px" style="background:rgba(255,255,255,.04);"></div>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-400">High-confidence play</span>
-              <span class="mono font-bold" style="color:var(--gold2);">2–3% of bankroll</span>
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm" style="color:rgba(255,255,255,0.6);">High-confidence play</span>
+                <span class="mono font-bold text-sm" style="color:var(--gold2);">2–3% of bankroll</span>
+              </div>
+              <div class="h-1.5 rounded-full" style="background:rgba(255,255,255,0.06);">
+                <div class="pbar-fill" style="width:0%" data-width="50%"></div>
+              </div>
             </div>
-            <div class="h-px" style="background:rgba(255,255,255,.04);"></div>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-400">Premium top play</span>
-              <span class="mono font-bold" style="color:var(--gold2);">3–5% of bankroll</span>
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm" style="color:rgba(255,255,255,0.6);">Premium top play</span>
+                <span class="mono font-bold text-sm" style="color:var(--gold2);">3–5% of bankroll</span>
+              </div>
+              <div class="h-1.5 rounded-full" style="background:rgba(255,255,255,0.06);">
+                <div class="pbar-fill" style="width:0%" data-width="70%"></div>
+              </div>
             </div>
-            <div class="h-px" style="background:rgba(255,255,255,.04);"></div>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-400">Max bet threshold</span>
-              <span class="mono font-bold text-red-400">Never exceed 5%</span>
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm" style="color:rgba(255,255,255,0.6);">Max bet threshold</span>
+                <span class="mono font-bold text-sm text-red-400">Never exceed 5%</span>
+              </div>
+              <div class="h-1.5 rounded-full" style="background:rgba(255,255,255,0.06);">
+                <div style="height:6px;border-radius:4px;background:linear-gradient(90deg,#F43F5E,#F97316);width:0%;transition:width 1.5s ease;" class="pbar-fill-red" data-width="90%"></div>
+              </div>
             </div>
           </div>
-          <div class="mt-4 p-3 rounded-lg" style="background:rgba(212,160,23,.06);border:1px solid var(--border);">
+          <div class="mt-5 p-3 rounded-xl" style="background:rgba(212,160,23,0.05);border:1px solid rgba(212,160,23,0.12);">
             <span class="mono text-xs" style="color:var(--gold2);">Discipline wins long-term. Emotional betting destroys bankrolls. OTB teaches both the picks and the process.</span>
           </div>
         </div>
 
-        <!-- Quick math -->
-        <div class="p-6 rounded-2xl" style="background:var(--panel2);border:1px solid var(--bord2);">
+        <!-- Value calculator -->
+        <div class="glass rounded-2xl p-6 shine" style="border:1px solid var(--bord2);">
           <div class="mono text-xs uppercase tracking-widest mb-3 font-bold" style="color:var(--green);">The $20 Value Calculation</div>
           <div class="space-y-2">
             <div class="flex items-center justify-between text-sm">
-              <span class="text-gray-400">3-day access cost</span>
+              <span style="color:rgba(255,255,255,0.4);">3-day access cost</span>
               <span class="mono font-bold text-white">$20.00</span>
             </div>
             <div class="flex items-center justify-between text-sm">
-              <span class="text-gray-400">Cost per day</span>
+              <span style="color:rgba(255,255,255,0.4);">Cost per day</span>
               <span class="mono font-bold text-white">~$6.67</span>
             </div>
             <div class="flex items-center justify-between text-sm">
-              <span class="text-gray-400">Avg picks per day</span>
+              <span style="color:rgba(255,255,255,0.4);">Avg picks per day</span>
               <span class="mono font-bold text-white">3–5 plays</span>
             </div>
             <div class="h-px" style="background:rgba(255,255,255,.04);"></div>
             <div class="flex items-center justify-between text-sm">
-              <span class="text-gray-500">One winning -110 bet at $100</span>
+              <span style="color:rgba(255,255,255,0.35);">One winning -110 bet at $100</span>
               <span class="mono font-bold" style="color:var(--green);">+$90.91</span>
             </div>
             <div class="flex items-center justify-between text-sm">
-              <span class="text-gray-500">Membership ROI on 1 win</span>
+              <span style="color:rgba(255,255,255,0.35);">Membership ROI on 1 win</span>
               <span class="mono font-bold" style="color:var(--green);">+354%</span>
             </div>
           </div>
@@ -834,89 +1258,95 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     TESTIMONIALS
-═══════════════════════════ -->
-<section class="py-28 relative overflow-hidden" style="background:var(--ink2);">
+<!-- ════════════════════════════════
+     TESTIMONIALS — COLORED AVATAR BADGES
+════════════════════════════════ -->
+<section class="py-28 relative overflow-hidden" style="background:var(--void);">
+  <div class="gold-line absolute top-0 left-0 right-0"></div>
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="text-center mb-14">
       <h2 class="bc font-black leading-none" style="font-size:clamp(3rem,6vw,6rem);line-height:.85;">
         <span class="text-white">130 REVIEWS.</span><br/>
         <span class="gold-text">4.9 STARS.</span>
       </h2>
-      <p class="text-gray-500 mt-4 mono">Real members. Real results. Verified on Whop.com.</p>
+      <p class="mt-4 mono" style="color:rgba(255,255,255,0.3);">Real members. Real results. Verified on Whop.com.</p>
     </div>
 
-    <!-- Stadium image strip -->
-    <div class="grid grid-cols-3 gap-3 mb-10 opacity-50">
-      <img src="https://images.unsplash.com/photo-1524117074681-31bd4de22ad3?w=500&q=70&auto=format&fit=crop" alt="" class="rounded-xl h-28 w-full object-cover"/>
-      <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=500&q=70&auto=format&fit=crop" alt="" class="rounded-xl h-28 w-full object-cover"/>
-      <img src="https://media.istockphoto.com/id/1384357158/photo/portrait-of-a-beautiful-mexican-woman.webp?a=1&b=1&s=612x612&w=0&k=20&c=gGj-Xj7Rduew9bAhz9mjkV5n77o6-dJcwBCZnsIYJpc=" alt="" class="rounded-xl h-28 w-full object-cover"/>
+    <!-- Colored initials row — NO stock images -->
+    <div class="flex justify-center gap-3 mb-12 reveal">
+      <div class="w-16 h-16 rounded-2xl flex items-center justify-center bc font-black text-xl text-black" style="background:linear-gradient(135deg,#D4A017,#F0BA20);">M</div>
+      <div class="w-16 h-16 rounded-2xl flex items-center justify-center bc font-black text-xl text-white" style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">J</div>
+      <div class="w-16 h-16 rounded-2xl flex items-center justify-center bc font-black text-xl text-black" style="background:linear-gradient(135deg,#16A34A,#22C55E);">D</div>
+      <div class="w-16 h-16 rounded-2xl flex items-center justify-center bc font-black text-xl text-white" style="background:linear-gradient(135deg,#7C3AED,#A855F7);">A</div>
+      <div class="w-16 h-16 rounded-2xl flex items-center justify-center bc font-black text-xl text-black" style="background:linear-gradient(135deg,#D97706,#F59E0B);">K</div>
+      <div class="w-16 h-16 rounded-2xl flex items-center justify-center bc font-black text-xl text-white" style="background:linear-gradient(135deg,#BE123C,#F43F5E);">S</div>
     </div>
 
     <div class="grid md:grid-cols-3 gap-5">
-      <div class="p-6 rounded-2xl reveal" style="background:var(--panel);border:1px solid var(--bord2);">
+
+      <div class="sport-c glass rounded-2xl p-6 reveal shine" style="border:1px solid var(--bord2);">
         <div class="flex gap-0.5 mb-3" style="color:var(--gold2);">★★★★★</div>
-        <p class="text-gray-300 text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;">"Been in multiple sports betting groups and OTB is the most transparent I've seen. They show their reasoning behind every pick, not just the ticket. That alone is worth the price. When their high-confidence plays hit, it's like they already knew the outcome — the analysis is that good."</p>
-        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid var(--bord2);">
-          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-black" style="background:var(--gold);">M</div>
-          <div><div class="bc font-bold text-sm text-white uppercase">Marcus T.</div><div class="mono text-xs text-gray-600">Verified Whop Member</div></div>
+        <p class="text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;color:rgba(255,255,255,0.6);">"Been in multiple sports betting groups and OTB is the most transparent I've seen. They show their reasoning behind every pick, not just the ticket. That alone is worth the price. When their high-confidence plays hit, it's like they already knew the outcome — the analysis is that good."</p>
+        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid rgba(255,255,255,0.05);">
+          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-black" style="background:linear-gradient(135deg,#D4A017,#F0BA20);">M</div>
+          <div><div class="bc font-bold text-sm text-white uppercase">Marcus T.</div><div class="mono text-xs" style="color:rgba(255,255,255,0.3);">Verified Whop Member</div></div>
         </div>
       </div>
 
-      <div class="p-6 rounded-2xl reveal" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="sport-c glass rounded-2xl p-6 reveal shine" style="border:1px solid var(--bord2);">
         <div class="flex gap-0.5 mb-3" style="color:var(--gold2);">★★★★★</div>
-        <p class="text-gray-300 text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;">"Started with a 3-day trial and immediately re-subscribed. Hit 3 of their first 4 picks I tailed. The NBA analysis is on another level — they actually explain WHY they're on a side, the sharp money signals, the injury context. This isn't a guessing service, it's real handicapping."</p>
-        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid var(--bord2);">
-          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-black" style="background:var(--gold);">J</div>
-          <div><div class="bc font-bold text-sm text-white uppercase">Jason R.</div><div class="mono text-xs text-gray-600">Verified Whop Member</div></div>
+        <p class="text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;color:rgba(255,255,255,0.6);">"Started with a 3-day trial and immediately re-subscribed. Hit 3 of their first 4 picks I tailed. The NBA analysis is on another level — they actually explain WHY they're on a side, the sharp money signals, the injury context. This isn't a guessing service, it's real handicapping."</p>
+        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid rgba(255,255,255,0.05);">
+          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-white" style="background:linear-gradient(135deg,#1e3a5f,#2563EB);">J</div>
+          <div><div class="bc font-bold text-sm text-white uppercase">Jason R.</div><div class="mono text-xs" style="color:rgba(255,255,255,0.3);">Verified Whop Member</div></div>
         </div>
       </div>
 
-      <div class="p-6 rounded-2xl reveal" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="sport-c glass rounded-2xl p-6 reveal shine" style="border:1px solid var(--bord2);">
         <div class="flex gap-0.5 mb-3" style="color:var(--gold2);">★★★★★</div>
-        <p class="text-gray-300 text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;">"$20 for 3 days is easily one of the best values in any betting community I've tried. The team obviously knows what they're doing — multi-sport coverage, great community chat, and they're not releasing 15 picks a day just to look active. Quality over quantity, and the results show it."</p>
-        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid var(--bord2);">
-          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-black" style="background:var(--gold);">D</div>
-          <div><div class="bc font-bold text-sm text-white uppercase">Derek S.</div><div class="mono text-xs text-gray-600">Verified Whop Member</div></div>
+        <p class="text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;color:rgba(255,255,255,0.6);">"$20 for 3 days is easily one of the best values in any betting community I've tried. The team obviously knows what they're doing — multi-sport coverage, great community chat, and they're not releasing 15 picks a day just to look active. Quality over quantity, and the results show it."</p>
+        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid rgba(255,255,255,0.05);">
+          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-black" style="background:linear-gradient(135deg,#16A34A,#22C55E);">D</div>
+          <div><div class="bc font-bold text-sm text-white uppercase">Derek S.</div><div class="mono text-xs" style="color:rgba(255,255,255,0.3);">Verified Whop Member</div></div>
         </div>
       </div>
 
-      <div class="p-6 rounded-2xl reveal" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="sport-c glass rounded-2xl p-6 reveal shine" style="border:1px solid var(--bord2);">
         <div class="flex gap-0.5 mb-3" style="color:var(--gold2);">★★★★★</div>
-        <p class="text-gray-300 text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;">"The community itself is underrated. 696 people who are all serious about betting — sharing their own angles, discussing lines, calling out when something looks off. OTB has created more than just a picks service; it's a legitimate betting network where the collective intelligence is genuinely useful."</p>
-        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid var(--bord2);">
-          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-black" style="background:var(--gold);">A</div>
-          <div><div class="bc font-bold text-sm text-white uppercase">Alex M.</div><div class="mono text-xs text-gray-600">Verified Whop Member</div></div>
+        <p class="text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;color:rgba(255,255,255,0.6);">"The community itself is underrated. 696 people who are all serious about betting — sharing their own angles, discussing lines, calling out when something looks off. OTB has created more than just a picks service; it's a legitimate betting network where the collective intelligence is genuinely useful."</p>
+        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid rgba(255,255,255,0.05);">
+          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-white" style="background:linear-gradient(135deg,#7C3AED,#A855F7);">A</div>
+          <div><div class="bc font-bold text-sm text-white uppercase">Alex M.</div><div class="mono text-xs" style="color:rgba(255,255,255,0.3);">Verified Whop Member</div></div>
         </div>
       </div>
 
-      <div class="p-6 rounded-2xl reveal" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="sport-c glass rounded-2xl p-6 reveal shine" style="border:1px solid var(--bord2);">
         <div class="flex gap-0.5 mb-3" style="color:var(--gold2);">★★★★★</div>
-        <p class="text-gray-300 text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;">"I've been betting sports for 6 years and thought I knew the game. OTB showed me angles I'd never considered — sharp money patterns, reverse line movement, why certain games come off the board. The education alone makes the membership worth it even before you add the actual pick performance."</p>
-        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid var(--bord2);">
-          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-black" style="background:var(--gold);">K</div>
-          <div><div class="bc font-bold text-sm text-white uppercase">Kevin L.</div><div class="mono text-xs text-gray-600">Verified Whop Member</div></div>
+        <p class="text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;color:rgba(255,255,255,0.6);">"I've been betting sports for 6 years and thought I knew the game. OTB showed me angles I'd never considered — sharp money patterns, reverse line movement, why certain games come off the board. The education alone makes the membership worth it even before you add the actual pick performance."</p>
+        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid rgba(255,255,255,0.05);">
+          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-black" style="background:linear-gradient(135deg,#D97706,#F59E0B);">K</div>
+          <div><div class="bc font-bold text-sm text-white uppercase">Kevin L.</div><div class="mono text-xs" style="color:rgba(255,255,255,0.3);">Verified Whop Member</div></div>
         </div>
       </div>
 
-      <div class="p-6 rounded-2xl reveal" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="sport-c glass rounded-2xl p-6 reveal shine" style="border:1px solid var(--bord2);">
         <div class="flex gap-0.5 mb-3" style="color:var(--gold2);">★★★★★</div>
-        <p class="text-gray-300 text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;">"Tried the 3-day trial thinking I'd test it out. That was 2 months ago and I haven't stopped renewing. The NHL picks specifically are incredible — the team clearly understands hockey betting in a way that most sports betting services completely ignore. The puck line value they find is ridiculous."</p>
-        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid var(--bord2);">
-          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-black" style="background:var(--gold);">S</div>
-          <div><div class="bc font-bold text-sm text-white uppercase">Steve P.</div><div class="mono text-xs text-gray-600">Verified Whop Member</div></div>
+        <p class="text-sm leading-relaxed mb-4 mono" style="font-size:.82rem;color:rgba(255,255,255,0.6);">"Tried the 3-day trial thinking I'd test it out. That was 2 months ago and I haven't stopped renewing. The NHL picks specifically are incredible — the team clearly understands hockey betting in a way that most sports betting services completely ignore. The puck line value they find is ridiculous."</p>
+        <div class="flex items-center gap-3 pt-3" style="border-top:1px solid rgba(255,255,255,0.05);">
+          <div class="w-8 h-8 rounded-xl flex items-center justify-center bc font-black text-xs text-white" style="background:linear-gradient(135deg,#BE123C,#F43F5E);">S</div>
+          <div><div class="bc font-bold text-sm text-white uppercase">Steve P.</div><div class="mono text-xs" style="color:rgba(255,255,255,0.3);">Verified Whop Member</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════
+<!-- ════════════════════════════════
      PRICING
-═══════════════════════════ -->
-<section id="pricing" class="py-28 relative overflow-hidden" style="background:var(--panel);">
-  <div class="absolute" style="width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.07),transparent 65%);filter:blur(60px);pointer-events:none;"></div>
+════════════════════════════════ -->
+<section id="pricing" class="py-28 relative overflow-hidden" style="background:var(--surface);">
+  <div class="gold-line absolute top-0 left-0 right-0"></div>
+  <div class="absolute" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,0.05),transparent 65%);filter:blur(80px);pointer-events:none;"></div>
   <div class="max-w-3xl mx-auto px-5 lg:px-8 relative z-10">
     <div class="text-center mb-14">
       <h2 class="bc font-black leading-none" style="font-size:clamp(3rem,6vw,6rem);line-height:.85;">
@@ -924,310 +1354,414 @@
         <span class="gold-text">AFFORDABLE.</span><br/>
         <span class="text-white">PROFITABLE.</span>
       </h2>
-      <p class="text-gray-500 max-w-md mx-auto mt-5">One membership tier. Full access. Everything OTB offers — $20 for 3 full days of elite sports betting picks.</p>
+      <p class="max-w-md mx-auto mt-5" style="color:rgba(255,255,255,0.4);">One membership tier. Full access. Everything OTB offers — $20 for 3 full days of elite sports betting picks.</p>
     </div>
 
-    <!-- Main pricing card -->
-    <div class="p-10 rounded-2xl mb-6 relative overflow-hidden" style="background:linear-gradient(145deg,rgba(212,160,23,.1),var(--panel2));border:1px solid var(--gold);">
+    <!-- Main pricing card with tilt effect -->
+    <div class="rounded-2xl mb-6 relative overflow-hidden reveal tilt-card shine"
+         style="background:linear-gradient(145deg,rgba(30,24,8,0.95),rgba(20,14,4,0.98));border:1px solid rgba(212,160,23,0.4);box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 80px rgba(212,160,23,0.04);">
+
       <!-- Corner badge -->
-      <div class="absolute top-6 right-6 mono text-xs font-bold px-3 py-1.5 rounded-lg uppercase tracking-wider" style="background:rgba(212,160,23,.15);color:var(--gold2);border:1px solid var(--border);">
+      <div class="absolute top-0 right-0 bc font-black text-black text-xs px-5 py-2 uppercase tracking-wider rounded-bl-2xl" style="background:linear-gradient(135deg,#D4A017,#F0BA20);">
         Best Value
       </div>
 
-      <div class="flex items-start justify-between mb-6">
-        <div>
-          <div class="mono text-xs uppercase tracking-widest mb-2 font-bold" style="color:var(--gold2);">Off The Board</div>
-          <div class="bc font-black leading-none" style="font-size:5rem;line-height:1;">
-            <span class="gold-text">$20</span>
+      <div class="p-10">
+        <div class="flex items-start justify-between mb-6">
+          <div>
+            <div class="mono text-xs uppercase tracking-[0.2em] mb-2 font-bold" style="color:var(--gold2);">Off The Board</div>
+            <div class="bc font-black gold-text leading-none" style="font-size:5.5rem;">$20</div>
+            <div class="bc font-bold text-xl text-white uppercase tracking-wider mt-1">Per 3 Days</div>
+            <div class="mono text-sm mt-1" style="color:rgba(255,255,255,0.3);">≈ $6.67 per day</div>
           </div>
-          <div class="bc font-bold text-xl text-white uppercase tracking-wider mt-1">Per 3 Days</div>
-          <div class="mono text-sm text-gray-500 mt-1">≈ $6.67 per day</div>
+          <div class="text-right">
+            <div class="flex gap-0.5 justify-end mb-1" style="color:var(--gold2);">★★★★★</div>
+            <div class="mono text-sm text-white font-bold">4.9 / 5.0</div>
+            <div class="mono text-xs" style="color:rgba(255,255,255,0.3);">130 Whop reviews</div>
+          </div>
         </div>
-        <div class="text-right">
-          <div class="flex gap-0.5 justify-end mb-1" style="color:var(--gold2);">★★★★★</div>
-          <div class="mono text-sm text-white font-bold">4.9 / 5.0</div>
-          <div class="mono text-xs text-gray-500">130 Whop reviews</div>
+
+        <div class="h-px mb-8" style="background:rgba(212,160,23,0.2);"></div>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-8">
+          <div class="space-y-3">
+            <div class="flex items-start gap-2 text-sm" style="color:rgba(255,255,255,0.65);"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Daily best plays across all sports</div>
+            <div class="flex items-start gap-2 text-sm" style="color:rgba(255,255,255,0.65);"><span class="mt-0.5" style="color:var(--gold2);">◆</span> NBA, NFL, MLB, NHL full coverage</div>
+            <div class="flex items-start gap-2 text-sm" style="color:rgba(255,255,255,0.65);"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Sharp money intel & analysis</div>
+            <div class="flex items-start gap-2 text-sm" style="color:rgba(255,255,255,0.65);"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Line movement alerts & timing</div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-2 text-sm" style="color:rgba(255,255,255,0.65);"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Active community of 696 bettors</div>
+            <div class="flex items-start gap-2 text-sm" style="color:rgba(255,255,255,0.65);"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Betting education & bankroll guides</div>
+            <div class="flex items-start gap-2 text-sm" style="color:rgba(255,255,255,0.65);"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Full reasoning behind every pick</div>
+            <div class="flex items-start gap-2 text-sm" style="color:rgba(255,255,255,0.65);"><span class="mt-0.5" style="color:var(--gold2);">◆</span> All-day coverage morning to night</div>
+          </div>
         </div>
+
+        <a href="https://whop.com/off-the-board/off-the-board?a=digitalartlab" target="_blank"
+           class="btn-vegas block text-center py-5 rounded-2xl bc font-black text-2xl uppercase tracking-wider neon-gold text-black">
+          Join Off The Board — $20 / 3 Days →
+        </a>
+
+        <p class="mono text-xs text-center mt-4" style="color:rgba(255,255,255,0.25);">Renew anytime · Whop.com platform · 696 members · 4.9★ verified rating</p>
       </div>
-
-      <div class="h-px mb-8" style="background:rgba(212,160,23,.2);"></div>
-
-      <div class="grid md:grid-cols-2 gap-4 mb-8">
-        <div class="space-y-3">
-          <div class="flex items-start gap-2 text-sm text-gray-300"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Daily best plays across all sports</div>
-          <div class="flex items-start gap-2 text-sm text-gray-300"><span class="mt-0.5" style="color:var(--gold2);">◆</span> NBA, NFL, MLB, NHL full coverage</div>
-          <div class="flex items-start gap-2 text-sm text-gray-300"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Sharp money intel & analysis</div>
-          <div class="flex items-start gap-2 text-sm text-gray-300"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Line movement alerts & timing</div>
-        </div>
-        <div class="space-y-3">
-          <div class="flex items-start gap-2 text-sm text-gray-300"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Active community of 696 bettors</div>
-          <div class="flex items-start gap-2 text-sm text-gray-300"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Betting education & bankroll guides</div>
-          <div class="flex items-start gap-2 text-sm text-gray-300"><span class="mt-0.5" style="color:var(--gold2);">◆</span> Full reasoning behind every pick</div>
-          <div class="flex items-start gap-2 text-sm text-gray-300"><span class="mt-0.5" style="color:var(--gold2);">◆</span> All-day coverage morning to night</div>
-        </div>
-      </div>
-
-      <a href="https://whop.com/off-the-board/off-the-board?a=digitalartlab" target="_blank"
-         class="btn-gold block text-center py-5 rounded-xl bc font-black text-2xl uppercase tracking-wider gold-glow"
-         style="letter-spacing:.08em;">
-        Join Off The Board — $20 / 3 Days →
-      </a>
-
-      <p class="mono text-xs text-center text-gray-600 mt-4">Renew anytime · Whop.com platform · 696 members · 4.9★ verified rating</p>
     </div>
 
-    <!-- Affiliate note -->
-    <div class="p-5 rounded-2xl text-center" style="background:var(--panel2);border:1px solid var(--bord2);">
+    <!-- Affiliate -->
+    <div class="p-5 rounded-2xl text-center reveal glass" style="border:1px solid var(--bord2);">
       <div class="bc font-bold text-white text-base uppercase tracking-wider mb-1">Earn 30% Referring Others</div>
-      <p class="mono text-gray-500 text-xs">Off The Board offers a 30% affiliate commission on every referred sale. Share your link — every referral earns you $6 back for a 3-day membership sale.</p>
+      <p class="mono text-xs" style="color:rgba(255,255,255,0.35);">Off The Board offers a 30% affiliate commission on every referred sale. Share your link — every referral earns you $6 back for a 3-day membership sale.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════
+<!-- ════════════════════════════════
      FAQ
-═══════════════════════════ -->
-<section id="faq" class="py-28" style="background:var(--ink);">
-  <div class="max-w-3xl mx-auto px-5 lg:px-8">
+════════════════════════════════ -->
+<section id="faq" class="py-28" style="background:var(--void);">
+  <div class="gold-line" style="position:relative;margin-bottom:0;"></div>
+  <div class="max-w-3xl mx-auto px-5 lg:px-8 pt-14">
     <div class="text-center mb-14">
       <h2 class="bc font-black leading-none" style="font-size:clamp(3rem,6vw,6rem);line-height:.85;"><span class="text-white">FAQ</span></h2>
     </div>
-    <div class="space-y-3">
 
-      <div class="faq-item rounded-xl overflow-hidden" style="background:var(--panel);border:1px solid var(--bord2);">
+    <div class="space-y-2">
+
+      <div class="faq-item rounded-2xl overflow-hidden reveal glass" style="border:1px solid var(--bord2);">
         <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4">
           <span class="bc font-bold text-base text-white uppercase tracking-wide">What does "Off the Board" actually mean?</span>
-          <span class="fi faq-icon flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.1);color:var(--gold2);">+</span>
+          <span class="fi faq-icon w-7 h-7 rounded-xl flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.08);color:var(--gold2);flex-shrink:0;">+</span>
         </button>
-        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5 text-gray-400">"Off the Board" (OTB) is a term used in sports betting when a sportsbook completely removes a game or event from the betting board — meaning no more bets are accepted on that game. This typically happens when significant news drops that would drastically shift the line: a star quarterback's injury status is unknown, breaking news about a team, or a bet the book isn't comfortable taking anymore. The community named itself after this concept because it operates with the same intelligence that causes books to go OTB — staying ahead of the market with sharp-side information before it's reflected in the public line.</p></div>
+        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5" style="color:rgba(255,255,255,0.45);">"Off the Board" (OTB) is a term used in sports betting when a sportsbook completely removes a game or event from the betting board — meaning no more bets are accepted on that game. This typically happens when significant news drops that would drastically shift the line: a star quarterback's injury status is unknown, breaking news about a team, or a bet the book isn't comfortable taking anymore. The community named itself after this concept because it operates with the same intelligence that causes books to go OTB — staying ahead of the market with sharp-side information before it's reflected in the public line.</p></div>
       </div>
 
-      <div class="faq-item rounded-xl overflow-hidden" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="faq-item rounded-2xl overflow-hidden reveal glass" style="border:1px solid var(--bord2);">
         <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4">
           <span class="bc font-bold text-base text-white uppercase tracking-wide">Who are the handicappers behind OTB?</span>
-          <span class="fi faq-icon flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.1);color:var(--gold2);">+</span>
+          <span class="fi faq-icon w-7 h-7 rounded-xl flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.08);color:var(--gold2);flex-shrink:0;">+</span>
         </button>
-        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5 text-gray-400">Off The Board is a collective group of highly skilled professional handicappers — not a single-person operation. Each member of the team brings specialized expertise in different sports and market types, which is why OTB can cover NBA, NFL, MLB, and NHL with genuine depth rather than surface-level picks. The team's combined background in sports analysis, line reading, sharp money tracking, and betting methodology produces a daily pick slate that reflects multi-layered professional analysis. The 4.9★ verified rating across 130 Whop reviews is the proof of their collective track record.</p></div>
+        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5" style="color:rgba(255,255,255,0.45);">Off The Board is a collective group of highly skilled professional handicappers — not a single-person operation. Each member of the team brings specialized expertise in different sports and market types, which is why OTB can cover NBA, NFL, MLB, and NHL with genuine depth rather than surface-level picks. The team's combined background in sports analysis, line reading, sharp money tracking, and betting methodology produces a daily pick slate that reflects multi-layered professional analysis. The 4.9★ verified rating across 130 Whop reviews is the proof of their collective track record.</p></div>
       </div>
 
-      <div class="faq-item rounded-xl overflow-hidden" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="faq-item rounded-2xl overflow-hidden reveal glass" style="border:1px solid var(--bord2);">
         <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4">
           <span class="bc font-bold text-base text-white uppercase tracking-wide">How many picks are released each day?</span>
-          <span class="fi faq-icon flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.1);color:var(--gold2);">+</span>
+          <span class="fi faq-icon w-7 h-7 rounded-xl flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.08);color:var(--gold2);flex-shrink:0;">+</span>
         </button>
-        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5 text-gray-400">OTB prioritizes quality over quantity — you'll receive the team's best plays each day, not an overwhelming volume of picks designed to make some hit statistically. On busy sports days, you might see 4–6 plays across multiple sports. On lighter days with fewer quality spots, OTB may release fewer picks — because discipline means only betting when the edge is genuine. This selective approach is what maintains the high win percentage and 4.9★ reputation. Every pick released is one the team is genuinely confident in, not filler content.</p></div>
+        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5" style="color:rgba(255,255,255,0.45);">OTB prioritizes quality over quantity — you'll receive the team's best plays each day, not an overwhelming volume of picks designed to make some hit statistically. On busy sports days, you might see 4–6 plays across multiple sports. On lighter days with fewer quality spots, OTB may release fewer picks — because discipline means only betting when the edge is genuine. This selective approach is what maintains the high win percentage and 4.9★ reputation. Every pick released is one the team is genuinely confident in, not filler content.</p></div>
       </div>
 
-      <div class="faq-item rounded-xl overflow-hidden" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="faq-item rounded-2xl overflow-hidden reveal glass" style="border:1px solid var(--bord2);">
         <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4">
           <span class="bc font-bold text-base text-white uppercase tracking-wide">What bet types does OTB cover?</span>
-          <span class="fi faq-icon flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.1);color:var(--gold2);">+</span>
+          <span class="fi faq-icon w-7 h-7 rounded-xl flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.08);color:var(--gold2);flex-shrink:0;">+</span>
         </button>
-        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5 text-gray-400">OTB covers the full spectrum of standard sports bets — point spreads (ATS), moneylines, totals (over/under), run lines (MLB), puck lines (NHL), and player props on select occasions. The team doesn't stick rigidly to one bet type; they identify where the value lies and bet accordingly. Some days the value is on an underdog moneyline; other days it's a total or a side. The flexibility to recognize value across bet types is part of what makes a professional handicapping team superior to a single-sport, single-bet-type operation.</p></div>
+        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5" style="color:rgba(255,255,255,0.45);">OTB covers the full spectrum of standard sports bets — point spreads (ATS), moneylines, totals (over/under), run lines (MLB), puck lines (NHL), and player props on select occasions. The team doesn't stick rigidly to one bet type; they identify where the value lies and bet accordingly. Some days the value is on an underdog moneyline; other days it's a total or a side. The flexibility to recognize value across bet types is part of what makes a professional handicapping team superior to a single-sport, single-bet-type operation.</p></div>
       </div>
 
-      <div class="faq-item rounded-xl overflow-hidden" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="faq-item rounded-2xl overflow-hidden reveal glass" style="border:1px solid var(--bord2);">
         <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4">
           <span class="bc font-bold text-base text-white uppercase tracking-wide">Is sports betting legal? Should I be concerned?</span>
-          <span class="fi faq-icon flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.1);color:var(--gold2);">+</span>
+          <span class="fi faq-icon w-7 h-7 rounded-xl flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.08);color:var(--gold2);flex-shrink:0;">+</span>
         </button>
-        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5 text-gray-400">Sports betting is legal in a growing number of US states and many countries worldwide. OTB provides sports betting analysis, picks, and insights — which is fully legal information. You are responsible for ensuring that sports betting is legal in your jurisdiction before placing any wagers. OTB does not place bets on behalf of members; we provide the analysis and picks, and you make your own betting decisions through your own legal sportsbook accounts. Always bet responsibly and only with money you can afford to lose. OTB encourages disciplined bankroll management as a core part of the membership experience.</p></div>
+        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5" style="color:rgba(255,255,255,0.45);">Sports betting is legal in a growing number of US states and many countries worldwide. OTB provides sports betting analysis, picks, and insights — which is fully legal information. You are responsible for ensuring that sports betting is legal in your jurisdiction before placing any wagers. OTB does not place bets on behalf of members; we provide the analysis and picks, and you make your own betting decisions through your own legal sportsbook accounts. Always bet responsibly and only with money you can afford to lose. OTB encourages disciplined bankroll management as a core part of the membership experience.</p></div>
       </div>
 
-      <div class="faq-item rounded-xl overflow-hidden" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="faq-item rounded-2xl overflow-hidden reveal glass" style="border:1px solid var(--bord2);">
         <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4">
           <span class="bc font-bold text-base text-white uppercase tracking-wide">How do I access picks after joining?</span>
-          <span class="fi faq-icon flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.1);color:var(--gold2);">+</span>
+          <span class="fi faq-icon w-7 h-7 rounded-xl flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.08);color:var(--gold2);flex-shrink:0;">+</span>
         </button>
-        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5 text-gray-400">After purchasing through Whop.com, you'll receive immediate access to the Off The Board community hub — which includes access to the picks channels, community chat, and any additional content. Picks are typically posted in a dedicated channel within the community, and you can set up Whop notifications so you receive an alert the moment a new play is released. This is especially important for time-sensitive picks where you want to bet the best available line before the market moves. The Whop app on iOS and Android makes mobile notification access seamless.</p></div>
+        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5" style="color:rgba(255,255,255,0.45);">After purchasing through Whop.com, you'll receive immediate access to the Off The Board community hub — which includes access to the picks channels, community chat, and any additional content. Picks are typically posted in a dedicated channel within the community, and you can set up Whop notifications so you receive an alert the moment a new play is released. This is especially important for time-sensitive picks where you want to bet the best available line before the market moves. The Whop app on iOS and Android makes mobile notification access seamless.</p></div>
       </div>
 
-      <div class="faq-item rounded-xl overflow-hidden" style="background:var(--panel);border:1px solid var(--bord2);">
+      <div class="faq-item rounded-2xl overflow-hidden reveal glass" style="border:1px solid var(--bord2);">
         <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4">
           <span class="bc font-bold text-base text-white uppercase tracking-wide">Can I renew after my 3-day period ends?</span>
-          <span class="fi faq-icon flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.1);color:var(--gold2);">+</span>
+          <span class="fi faq-icon w-7 h-7 rounded-xl flex items-center justify-center bc font-black text-xl" style="background:rgba(212,160,23,.08);color:var(--gold2);flex-shrink:0;">+</span>
         </button>
-        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5 text-gray-400">Absolutely — the 3-day membership is designed to be renewed as often as you want to continue with OTB. Many members renew continuously. The 3-day format gives you full flexibility: you can renew for active sports weeks and pause during off-season periods or quieter stretches when you want to conserve your betting bankroll. It's the most flexible structure in sports betting — you're never locked into a long-term commitment, and you only pay when you're actively engaged with the betting calendar.</p></div>
+        <div class="fb faq-body px-6"><p class="text-sm leading-relaxed pb-5" style="color:rgba(255,255,255,0.45);">Absolutely — the 3-day membership is designed to be renewed as often as you want to continue with OTB. Many members renew continuously. The 3-day format gives you full flexibility: you can renew for active sports weeks and pause during off-season periods or quieter stretches when you want to conserve your betting bankroll. It's the most flexible structure in sports betting — you're never locked into a long-term commitment, and you only pay when you're actively engaged with the betting calendar.</p></div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════
+<!-- ════════════════════════════════
      FINAL CTA
-═══════════════════════════ -->
-<section class="py-32 relative overflow-hidden" style="background:var(--ink2);">
-  <div class="stripe-bg absolute inset-0 opacity-30"></div>
-  <div class="absolute" style="width:800px;height:800px;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.1),transparent 65%);filter:blur(60px);pointer-events:none;"></div>
-  <div class="absolute inset-0">
-    <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=1600&q=80&auto=format&fit=crop"
-         class="w-full h-full object-cover opacity-8"/>
-    <div class="absolute inset-0" style="background:rgba(8,10,6,.96);"></div>
+════════════════════════════════ -->
+<section class="py-32 relative overflow-hidden" style="background:var(--deep);">
+  <div class="gold-line absolute top-0 left-0 right-0"></div>
+  <!-- Abstract stadium arch SVG -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <svg class="absolute bottom-0 left-0 right-0 w-full" viewBox="0 0 1440 400" fill="none" style="opacity:.06;">
+      <path d="M0 400 Q 360 80 720 60 Q 1080 40 1440 400 Z" fill="rgba(212,160,23,1)"/>
+    </svg>
   </div>
-  <div class="absolute top-0 left-0 right-0 h-0.5" style="background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);"></div>
-  <div class="absolute bottom-0 left-0 right-0 h-0.5" style="background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);"></div>
+  <div class="absolute" style="width:1000px;height:1000px;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,0.06),transparent 65%);filter:blur(80px);pointer-events:none;"></div>
+  <div class="gold-line absolute bottom-0 left-0 right-0"></div>
 
   <div class="max-w-5xl mx-auto px-5 text-center relative z-10">
-    <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full mb-8" style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.3);">
-      <div class="pulse-gold"></div>
-      <span class="mono text-xs font-bold uppercase tracking-widest" style="color:var(--gold2);">4.9★ · 130 Reviews · 696 Members · $20 / 3 Days</span>
+    <div class="flex flex-wrap justify-center gap-3 mb-8">
+      <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full" style="background:rgba(212,160,23,.07);border:1px solid rgba(212,160,23,.25);">
+        <div class="pdot"></div>
+        <span class="mono text-xs font-bold uppercase tracking-widest" style="color:var(--gold2);">4.9★ · 130 Reviews · 696 Members · $20 / 3 Days</span>
+      </div>
     </div>
 
-    <h2 class="bc font-black leading-none mb-6" style="font-size:clamp(4rem,10vw,10rem);line-height:.85;">
+    <h2 class="bc font-black leading-none mb-6" style="font-size:clamp(4rem,10vw,10rem);line-height:.85;letter-spacing:-.02em;">
       <span class="text-white">BEAT</span><br/>
       <span class="gold-text">THE</span><br/>
       <span class="text-white">BOOKS.</span>
     </h2>
 
-    <p class="text-gray-400 max-w-2xl mx-auto mb-4 leading-relaxed" style="font-size:1.05rem;">
+    <p class="max-w-2xl mx-auto mb-4 leading-relaxed" style="font-size:1.05rem;color:rgba(255,255,255,0.5);">
       A highly skilled group of elite handicappers delivering their very best plays on a daily basis. High-level insights and advice across NBA, NFL, MLB, and NHL. Teaching you how to capitalize in sports betting — one day at a time.
     </p>
-    <p class="text-gray-500 max-w-lg mx-auto mb-10 mono text-sm">For just $6.67 per day, you get the same intelligence that makes sportsbooks nervous. That's the Off The Board edge.</p>
+    <p class="max-w-lg mx-auto mb-10 mono text-sm" style="color:rgba(255,255,255,0.3);">For just $6.67 per day, you get the same intelligence that makes sportsbooks nervous. That's the Off The Board edge.</p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a href="https://whop.com/off-the-board/off-the-board?a=digitalartlab" target="_blank"
-         class="btn-gold inline-flex items-center justify-center gap-2 px-12 py-5 rounded-xl bc font-black text-2xl uppercase tracking-wider gold-glow"
-         style="letter-spacing:.08em;">
+         class="btn-vegas inline-flex items-center justify-center gap-2 px-12 py-5 rounded-2xl bc font-black text-2xl uppercase tracking-wider neon-gold text-black"
+         style="letter-spacing:.06em;">
         Join OTB — $20 / 3 Days →
       </a>
       <a href="https://whop.com/off-the-board?a=digitalartlab" target="_blank"
-         class="btn-outline inline-flex items-center justify-center gap-2 px-12 py-5 rounded-xl bc font-bold text-xl uppercase tracking-wider text-white"
-         style="letter-spacing:.08em;">
+         class="btn-ghost inline-flex items-center justify-center gap-2 px-12 py-5 rounded-2xl bc font-bold text-xl uppercase tracking-wider">
         View Full Whop
       </a>
     </div>
 
-    <p class="mono text-xs text-gray-700 mt-10">Sports betting involves risk. Past performance does not guarantee future results. Always bet responsibly and within your means. Not available where prohibited by law.</p>
+    <p class="mono text-xs mt-10" style="color:rgba(255,255,255,0.18);">Sports betting involves risk. Past performance does not guarantee future results. Always bet responsibly and within your means. Not available where prohibited by law.</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════
+<!-- ════════════════════════════════
      FOOTER
-═══════════════════════════ -->
-<footer class="py-12" style="background:#040503;border-top:1px solid var(--bord2);">
+════════════════════════════════ -->
+<footer class="py-12" style="background:#040506;border-top:1px solid rgba(212,160,23,0.07);">
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
     <div class="grid md:grid-cols-4 gap-10 mb-10">
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,var(--gold),#8B6914);">
-            <span class="bc font-black text-black" style="font-size:.65rem;letter-spacing:.02em;">OTB</span>
+          <div class="w-9 h-9 rounded-2xl flex items-center justify-center" style="background:linear-gradient(135deg,#92600A,#D4A017);">
+            <span class="bc font-black text-black" style="font-size:.65rem;">OTB</span>
           </div>
           <div>
             <div class="bc font-black text-white uppercase tracking-wider">Off The Board</div>
-            <div class="mono text-xs" style="color:var(--gold2);font-size:.55rem;letter-spacing:.1em;">ELITE HANDICAPPERS</div>
+            <div class="mono text-xs" style="color:var(--gold2);font-size:.53rem;letter-spacing:.12em;">ELITE HANDICAPPERS</div>
           </div>
         </div>
-        <p class="mono text-xs text-gray-600 leading-relaxed">Highly skilled group of handicappers delivering their very best plays on a daily basis. 4.9★ · 130 reviews · 696 members · Whop verified.</p>
+        <p class="mono text-xs leading-relaxed" style="color:rgba(255,255,255,0.25);">Highly skilled group of handicappers delivering their very best plays on a daily basis. 4.9★ · 130 reviews · 696 members · Whop verified.</p>
       </div>
       <div>
         <div class="mono text-xs uppercase tracking-widest mb-4 font-bold" style="color:var(--gold2);">Membership</div>
         <ul class="space-y-2">
-          <li><a href="https://whop.com/off-the-board/off-the-board?a=digitalartlab" class="mono text-xs text-gray-600 hover:text-white transition-colors">3-Day Access — $20</a></li>
-          <li><a href="https://whop.com/off-the-board?a=digitalartlab" class="mono text-xs text-gray-600 hover:text-white transition-colors">Full Whop Page</a></li>
+          <li><a href="https://whop.com/off-the-board/off-the-board?a=digitalartlab" class="mono text-xs transition-colors hover:text-white" style="color:rgba(255,255,255,0.25);">3-Day Access — $20</a></li>
+          <li><a href="https://whop.com/off-the-board?a=digitalartlab" class="mono text-xs transition-colors hover:text-white" style="color:rgba(255,255,255,0.25);">Full Whop Page</a></li>
         </ul>
       </div>
       <div>
         <div class="mono text-xs uppercase tracking-widest mb-4 font-bold" style="color:var(--gold2);">Sports Covered</div>
         <ul class="space-y-2">
-          <li><span class="mono text-xs text-gray-600">🏀 NBA — Daily picks</span></li>
-          <li><span class="mono text-xs text-gray-600">🏈 NFL — Spreads & MLs</span></li>
-          <li><span class="mono text-xs text-gray-600">⚾ MLB — Full season</span></li>
-          <li><span class="mono text-xs text-gray-600">🏒 NHL — Puck line value</span></li>
-          <li><span class="mono text-xs text-gray-600">+ NCAAB, NCAAF & more</span></li>
+          <li><span class="mono text-xs" style="color:rgba(255,255,255,0.25);">🏀 NBA — Daily picks</span></li>
+          <li><span class="mono text-xs" style="color:rgba(255,255,255,0.25);">🏈 NFL — Spreads & MLs</span></li>
+          <li><span class="mono text-xs" style="color:rgba(255,255,255,0.25);">⚾ MLB — Full season</span></li>
+          <li><span class="mono text-xs" style="color:rgba(255,255,255,0.25);">🏒 NHL — Puck line value</span></li>
+          <li><span class="mono text-xs" style="color:rgba(255,255,255,0.25);">+ NCAAB, NCAAF & more</span></li>
         </ul>
       </div>
       <div>
         <div class="mono text-xs uppercase tracking-widest mb-4 font-bold" style="color:var(--gold2);">Community Stats</div>
         <ul class="space-y-2">
-          <li><span class="mono text-xs text-gray-600">4.9★ Average Whop Rating</span></li>
-          <li><span class="mono text-xs text-gray-600">130 Verified Reviews</span></li>
-          <li><span class="mono text-xs text-gray-600">696 Active Members</span></li>
-          <li><span class="mono text-xs text-gray-600">30% Affiliate Commission</span></li>
+          <li><span class="mono text-xs" style="color:rgba(255,255,255,0.25);">4.9★ Average Whop Rating</span></li>
+          <li><span class="mono text-xs" style="color:rgba(255,255,255,0.25);">130 Verified Reviews</span></li>
+          <li><span class="mono text-xs" style="color:rgba(255,255,255,0.25);">696 Active Members</span></li>
+          <li><span class="mono text-xs" style="color:rgba(255,255,255,0.25);">30% Affiliate Commission</span></li>
         </ul>
       </div>
     </div>
-    <div class="border-t pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style="border-color:var(--bord2);">
-      <p class="mono text-xs text-gray-700">© 2025 Off The Board · Whop.com · Affiliate: digitalartlab · 30% Commission</p>
-      <p class="mono text-xs text-gray-700">Bet Responsibly · Not available where prohibited · Not financial advice</p>
+    <div class="border-t pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style="border-color:rgba(212,160,23,0.07);">
+      <p class="mono text-xs" style="color:rgba(255,255,255,0.18);">© 2025 Off The Board · Whop.com · Affiliate: digitalartlab · 30% Commission</p>
+      <p class="mono text-xs" style="color:rgba(255,255,255,0.18);">Bet Responsibly · Not available where prohibited · Not financial advice</p>
     </div>
   </div>
 </footer>
 
-<!-- ═══ JAVASCRIPT ═══ -->
+<!-- ════════════════════════════════
+     JAVASCRIPT — INTERACTIVE MAGIC
+════════════════════════════════ -->
 <script>
-  // NAV
-  const nav=document.getElementById('navbar');
-  window.addEventListener('scroll',()=>nav.classList.toggle('on',window.scrollY>50));
+/* ── CUSTOM CURSOR ── */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
 
-  // HAMBURGER
-  const ham=document.getElementById('ham');
-  const mnav=document.getElementById('mnav');
-  const hls=ham.querySelectorAll('.hl');
-  let open=false;
-  ham.addEventListener('click',()=>{
-    open=!open;
-    if(open){
-      mnav.classList.add('open');
-      hls[0].style.transform='rotate(45deg) translateY(8px)';
-      hls[1].style.opacity='0';
-      hls[2].style.transform='rotate(-45deg) translateY(-6px)';
-      hls[2].style.width='24px';
-      document.body.style.overflow='hidden';
-    } else {
-      mnav.classList.remove('open');
-      hls.forEach(h=>{h.style.transform='';h.style.opacity='';h.style.width='';});
-      document.body.style.overflow='';
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+});
+
+// Ring follows with lag
+(function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) *.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animateRing);
+})();
+
+// Hover expand
+document.querySelectorAll('a, button, .tilt-card, .sport-c').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    ring.style.width  = '60px';
+    ring.style.height = '60px';
+    ring.style.borderColor = 'rgba(212,160,23,0.8)';
+    cursor.style.transform = 'translate(-50%,-50%) scale(1.5)';
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.style.width  = '40px';
+    ring.style.height = '40px';
+    ring.style.borderColor = 'rgba(212,160,23,0.5)';
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+  });
+});
+
+/* ── NAV SCROLL ── */
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => nav.classList.toggle('on', window.scrollY > 50));
+
+/* ── HAMBURGER ── */
+const ham = document.getElementById('ham');
+const mnav = document.getElementById('mnav');
+const hls = ham.querySelectorAll('.hl');
+let menuOpen = false;
+ham.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mnav.classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+  hls[0].style.transform = menuOpen ? 'rotate(45deg) translateY(8px)' : '';
+  hls[1].style.opacity   = menuOpen ? '0' : '1';
+  hls[2].style.transform = menuOpen ? 'rotate(-45deg) translateY(-6px)' : '';
+  hls[2].style.width     = menuOpen ? '24px' : '16px';
+});
+document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => {
+  menuOpen = false;
+  mnav.classList.remove('open');
+  document.body.style.overflow = '';
+  hls.forEach(h => { h.style.transform = ''; h.style.opacity = ''; h.style.width = ''; });
+}));
+
+/* ── 3D TILT ── */
+document.querySelectorAll('.tilt-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const cx = r.left + r.width / 2;
+    const cy = r.top  + r.height / 2;
+    const dx = (e.clientX - cx) / (r.width / 2);
+    const dy = (e.clientY - cy) / (r.height / 2);
+    card.style.transform = `perspective(800px) rotateY(${dx * 6}deg) rotateX(${-dy * 4}deg) translateZ(8px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(800px) rotateY(0) rotateX(0) translateZ(0)';
+  });
+});
+
+/* ── HERO HEADLINE ANIMATION ── */
+['h1Line1','h1Line2','h1Line3'].forEach((id, i) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(40px)';
+  setTimeout(() => {
+    el.style.transition = 'all .8s cubic-bezier(0.16,1,0.3,1)';
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }, 200 + i * 150);
+});
+
+/* ── ANIMATED COUNTERS ── */
+function animateCount(el, target, suffix, duration) {
+  const isFloat = String(target).includes('.');
+  const start   = performance.now();
+  (function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+    const val   = eased * target;
+    el.textContent = (isFloat ? val.toFixed(1) : Math.floor(val)) + (suffix || '');
+    if (p < 1) requestAnimationFrame(step);
+  })(start);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el     = entry.target;
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    animateCount(el, target, suffix, 2000);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+/* ── PROGRESS BARS ── */
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const bar = entry.target;
+    const w   = bar.dataset.width;
+    setTimeout(() => { bar.style.width = w; }, 200);
+    barObs.unobserve(bar);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.pbar-fill, .pbar-fill-red').forEach(b => barObs.observe(b));
+
+/* ── SCROLL REVEAL ── */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 80);
+      revObs.unobserve(e.target);
     }
   });
-  document.querySelectorAll('.ml').forEach(l=>l.addEventListener('click',()=>{
-    open=false;mnav.classList.remove('open');
-    hls.forEach(h=>{h.style.transform='';h.style.opacity='';h.style.width='';});
-    document.body.style.overflow='';
-  }));
+}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
-  // FAQ
-  document.querySelectorAll('.faq-trigger').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const item=btn.closest('.faq-item');
-      const body=item.querySelector('.fb');
-      const icon=item.querySelector('.fi');
-      const wasOpen=body.classList.contains('open');
-      document.querySelectorAll('.fb').forEach(b=>b.classList.remove('open'));
-      document.querySelectorAll('.fi').forEach(i=>{i.textContent='+';i.classList.remove('open');});
-      if(!wasOpen){body.classList.add('open');icon.textContent='×';icon.classList.add('open');}
-    });
+/* ── FAQ ── */
+document.querySelectorAll('.faq-trigger').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item   = btn.closest('.faq-item');
+    const body   = item.querySelector('.fb');
+    const icon   = item.querySelector('.fi');
+    const wasOpen = body.classList.contains('open');
+    document.querySelectorAll('.fb').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.fi').forEach(i => { i.textContent = '+'; i.classList.remove('open'); });
+    if (!wasOpen) { body.classList.add('open'); icon.textContent = '×'; icon.classList.add('open'); }
   });
+});
 
-  // REVEAL
-  const ro=new IntersectionObserver(entries=>{
-    entries.forEach((e,i)=>{
-      if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*100);ro.unobserve(e.target);}
-    });
-  },{threshold:.08});
-  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+/* ── WIN RECORD ROTATOR ── */
+(function() {
+  const el = document.getElementById('recDisplay');
+  if (!el) return;
+  const recs = ['64% W/L','67% W/L','61% W/L','65% W/L','63% W/L'];
+  let i = 0;
+  el.style.transition = 'opacity .3s';
+  setInterval(() => {
+    i = (i + 1) % recs.length;
+    el.style.opacity = '0';
+    setTimeout(() => { el.textContent = recs[i]; el.style.opacity = '1'; }, 300);
+  }, 4000);
+})();
 
-  // Animated record display
-  (function(){
-    const el=document.getElementById('recDisplay');
-    if(!el)return;
-    const records=['64% W/L','67% W/L','61% W/L','65% W/L','63% W/L'];
-    let i=0;
-    setInterval(()=>{
-      i=(i+1)%records.length;
-      el.style.opacity='0';
-      setTimeout(()=>{el.textContent=records[i];el.style.opacity='1';},300);
-    },4000);
-    el.style.transition='opacity .3s';
-  })();
-
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click',e=>{
-      const t=document.querySelector(a.getAttribute('href'));
-      if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'});}
-    });
+/* ── SMOOTH SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' }); }
   });
+});
 </script>
 </body>
 </html>
